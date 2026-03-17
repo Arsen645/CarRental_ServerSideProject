@@ -13,14 +13,7 @@ function validateCarPlate ($first, $reg, $last) {
 }
 if (isset($_POST['submitCar'])) {
     try {
-        $cplateFirst = $_POST['cplateFirst'];
-        $cplateReg = $_POST['cplateRegion'];
-        $cplateLast = $_POST['cplateLast'];
-        $cbrand = $_POST['cbrand'];
-        $cmodel = $_POST['cmodel'];
-        $cyear = (Int) $_POST['cmonthlyrate'];
-        $cstatus = 'A';
-        $ccarClass = $_POST['ccarClass'];
+        
 
         $cplateFirst = htmlspecialchars(trim($_POST['cplateFirst']));
         $cplateLast = htmlspecialchars(trim($_POST['cplateLast']));
@@ -30,11 +23,12 @@ if (isset($_POST['submitCar'])) {
         $cmodel = htmlspecialchars(trim($_POST['cmodel']));
         $cyear = htmlspecialchars(trim($_POST['cyear']));
         $ccarClass = htmlspecialchars(trim($_POST['ccarClass']));
+        $cstatus = 'A';
 
         if ($cplateNo == '' or $cbrand == '' or $cmodel == '' or $cyear == ''
             or $ccarClass == '') {
             echo ("You did not complete the insert form correctly <br> ");
-        } elseif (validateCarPlate($cplateNo,$cstatusReg,$cplateLast)) {
+        } elseif (!validateCarPlate($cplateNo,$cstatusReg,$cplateLast)) {
             echo ("Plate number is not valid <br> ");
         } elseif (!$cyear>1900 && !$cyear < 2026) {
             echo ("Year is not valid");

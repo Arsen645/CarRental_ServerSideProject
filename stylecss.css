@@ -1,0 +1,103 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background: #1a252f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #f1c40f; /* Gold accent */
+}
+
+.navLinks {
+    display: flex;
+    list-style: none;
+}
+
+.navLinks li {
+    margin-left: 20px;
+}
+
+.navLinks a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Hero Section */
+.banner {
+    height: 60vh;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.bannerText h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+}
+
+.browseBtn {
+    background: #f1c40f;
+    border: none;
+    padding: 12px 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Fleet Grid */
+.ourCars {
+    padding: 50px 5%;
+    text-align: center;
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.carCard {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.carCard img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.add {
+    width: 100%;
+    background: #1a252f;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
