@@ -1,7 +1,7 @@
 <?php
 include 'header.html';
 function validateCarPlate ($first, $reg, $last) {
-    if (!is_int($first) && !$first >= 0 && !$first <= 262) {
+    if (!is_int($first) || $first < 0 || $first > 262) {
         return false;
     } elseif ($reg == 'A' && $reg == 'N') {
         return false;
@@ -14,11 +14,11 @@ function validateCarPlate ($first, $reg, $last) {
 if (isset($_POST['submitCar'])) {
     try {
         
-
+        $cplateNo = "";
         $cplateFirst = htmlspecialchars(trim($_POST['cplateFirst']));
         $cplateLast = htmlspecialchars(trim($_POST['cplateLast']));
-        $cstatusReg = htmlspecialchars(trim($_POST['cstatusReg']));
-        $cplateNo = $cplateFirst + '-' + $cplateReg + '-' + $cplateLast;
+        $cplateRegion = htmlspecialchars(trim($_POST['cplateRegion']));
+        $cplateNo = $cplateFirst . '-' . $cplateRegion . '-' . $cplateLast;
         $cbrand = htmlspecialchars(trim($_POST['cbrand']));
         $cmodel = htmlspecialchars(trim($_POST['cmodel']));
         $cyear = htmlspecialchars(trim($_POST['cyear']));
@@ -28,16 +28,16 @@ if (isset($_POST['submitCar'])) {
         if ($cplateNo == '' or $cbrand == '' or $cmodel == '' or $cyear == ''
             or $ccarClass == '') {
             echo ("You did not complete the insert form correctly <br> ");
-        } elseif (!validateCarPlate($cplateNo,$cstatusReg,$cplateLast)) {
-            echo ("Plate number is not valid <br> ");
-        } elseif (!$cyear>1900 && !$cyear < 2026) {
+        // } elseif (!validateCarPlate($cplateNo,$cplateRegion,$cplateLast)) {
+        //     echo ("Plate number is not valid <br> ");
+        } elseif ($cyear<1900 || $cyear > 2026) {
             echo ("Year is not valid");
         }
         else {
             
             $pdo = new PDO('mysql:host=localhost;dbname=CarRentalSys; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO cars (cplateNo,cbrand,cmodel,cyear,cstatus,ccarClass) 
+            $sql = "INSERT INTO cars (plateNo,brand,model,yearManufactured,status,carClass) 
             VALUES(:cplateNo, :cbrand, :cmodel, :cyear, :cstatus, :ccarClass)";
 
             $stmt = $pdo->prepare($sql);

@@ -1,6 +1,6 @@
 <?php
 include 'header.html';
-if (isset($_POST['submitdetails'])) {                   
+if (isset($_POST['addCustomer'])) {                   
 try {  
 
     $ccustName = htmlspecialchars(trim($_POST['ccustName']));
@@ -10,7 +10,7 @@ try {
     {
         echo("You did not complete the insert form correctly <br> ");
     } elseif(!filter_var($cemail, FILTER_VALIDATE_EMAIL)){
- 
+        echo("invalid email");
     }
 else{
     $pdo = new PDO('mysql:host=localhost;dbname=CarRentalSys; charset=utf8', 'root', ''); 
@@ -34,6 +34,5 @@ catch (PDOException $e) {
     echo $output;
 } 
 } 
-
  include 'addCustomerform.html' 
  ?>
