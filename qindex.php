@@ -15,8 +15,8 @@
                 <li><a href="insert/add.php">Insert carclass</a></li>
                 <li><a href="insert/addCustomer.php">Insert customers</a></li>
                 <li><a href="">Home</a></li>
-                <li><a href="">Our Cars</a></li>
-                <li><a href="">About Us</a></li>
+                <li><a href="deleteExercise/delete.php">Our Cars</a></li>
+                <li><a href="Update/updateCar1.php">update car</a></li>
                 <li><a href="" class="loginBtn">Register/Login</a></li>
             </ul>
         </nav>
