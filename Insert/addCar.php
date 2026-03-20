@@ -59,5 +59,5 @@ if (isset($_POST['submitCar'])) {
     }
 }
 
-include 'addCarform.html'
+include 'addCarform.php'
     ?>

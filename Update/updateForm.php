@@ -1,9 +1,9 @@
 <?php
+include '../connection.php';
+
 include '../header.html';
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=carrentalsys;charset=utf8', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if (!isset($_POST['plateno']) ) {
         die("No ID provided.");
@@ -31,5 +31,5 @@ try {
     echo 'Unable to connect to the database server: ' . $e->getMessage();
 }
 
-include 'updateDetails.html';
+include 'updateDetails.php';
 ?>
