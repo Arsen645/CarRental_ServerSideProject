@@ -4,9 +4,9 @@ $pdo = new PDO('mysql:host=localhost;dbname=CarRentalSys; charset=utf8', 'root',
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql = 'DELETE FROM cars WHERE PlateNo = :cPlateNo';
 $result = $pdo->prepare($sql);
-$result->bindValue(':cPlateNo', $_POST['PlateNo']);
+$result->bindValue(':cPlateNo', $_POST['plateno']);
 $result->execute();
-echo "You just deleted car no: " . $_POST['PlateNo'] ." \n click<a href='delete.php'>
+echo "You just deleted car no: " . $_POST['plateno'] ." \n click<a href='delete.php'>
 here</a> to go back ";
 }
 catch (PDOException $e) {

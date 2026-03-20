@@ -16,7 +16,7 @@
                 <li><a href="insert/addCustomer.php">Insert customers</a></li>
                 <li><a href="">Home</a></li>
                 <li><a href="deleteExercise/delete.php">Our Cars</a></li>
-                <li><a href="Update/updateCar1.php">update car</a></li>
+                <li><a href="Update/selectUpdate.php">update car</a></li>
                 <li><a href="" class="loginBtn">Register/Login</a></li>
             </ul>
         </nav>
@@ -25,7 +25,7 @@
     <section class="banner">
         <div class="bannerText">
             <h1>ELEVATE YOUR BUSINESS</h1>
-            <p>Reliable fleet rental for. Get 10+ vehicles today!</p>
+            <p>Reliable fleet rental. Get 10+ vehicles today!</p>
             <button class="browseBtn">BROWSE FLEET</button>
         </div>
     </section>
@@ -34,7 +34,7 @@
 
 
         <h2>Our Cars</h2>
-        <div class="fleet-grid">
+        <div class="fleetGrid">
                     <?php 
 try {
 $pdo = new PDO('mysql:host=localhost;dbname=carRentalSys; charset=utf8', 'root', '');
@@ -57,7 +57,18 @@ while($row = $result->fetch()) {
     <h3><?php echo $row['Brand'] . ' ' . $row['Model'];?></h3>
     <p>Year: <?php echo $row['YearManufactured']?></p>
     <p class="price">Price: <?php echo $row['MonthlyRate'];?>€ </p>
+    <div class="buttonGroup">
     <button class="add">Add</button>
+
+    <form action="Update/updateform.php" method="post">
+        <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+        <input type="submit" value="Update" class="add">
+    </form>
+    <form action="Delete/deletecar.php" method="post">
+        <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+        <input type="submit" value="Delete" class="add">
+    </form>
+</div>
     </div>
     <?php
     // echo $row['PlateNo'].', '.$row['Brand'].', '.$row['Model'].', '.
