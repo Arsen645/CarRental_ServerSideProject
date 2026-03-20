@@ -1,0 +1,24 @@
+<?php
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=carrentalsys;charset=utf8', 'root', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = 'UPDATE cars 
+            SET status = "A"
+            WHERE plateno = :cplate';
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':cplate', $_POST['cplateno']);
+    $stmt->execute();
+//For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
+    if ($stmt->rowCount() > 0) {
+        echo " click <a href='../../myCars.php'>here</a> to go back";
+    } else {
+        echo "Nothing updated (either no such car, or values were unchanged).".
+             "  click <a href='../../myCars.php'>here</a> to go back";
+    }
+
+} catch (PDOException $e) {
+    echo 'Unable to process query: ' . $e->getMessage();
+}
+?>
