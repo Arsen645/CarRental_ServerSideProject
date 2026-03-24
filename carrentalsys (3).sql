@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `carclass`
 --
-
+DROP TABLE IF EXISTS carclass;
 CREATE TABLE `carclass` (
   `ClassID` smallint(6) NOT NULL,
   `ClassName` varchar(6) NOT NULL,
@@ -41,14 +41,14 @@ CREATE TABLE `carclass` (
 INSERT INTO `carclass` (`ClassID`, `ClassName`, `Description`, `MonthlyRate`) VALUES
 (1, 'LUX', 'Luxury Car', 800.00),
 (2, 'SUV', 'Sport Utility Vehicle', 500.00),
-(3, 'reg', 'regular car', 400.00);
+(3, 'REG', 'regular car', 400.00);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `cars`
 --
-
+DROP TABLE IF EXISTS cars;
 CREATE TABLE `cars` (
   `PlateNo` varchar(12) NOT NULL,
   `Brand` varchar(20) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `cars` (
   `carClass` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---sfd
+
 -- Dumping data for table `cars`
 --
 
