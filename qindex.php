@@ -62,9 +62,31 @@ WHERE cars.Status = "A";';
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
                         <div class="buttonGroup">
-                            <button class="add">Add</button>
+                            <!-- <button class="add">Add</button> -->
+                            <form action="addButton" method="post">
+                                <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+                                <input type="submit" value="Add" class="add">
+                                <?php
+//                                 if (isset($_POST(addButton))
+// try {
+//     $sql = 'UPDATE cars 
+//             SET Status = :cstatus
+//             WHERE plateno = :cplate';
 
-                            <form action="Update/updateform.php" method="post">
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->bindValue(':cplate', $row['PlateNo']);
+//     $stmt->bindValue(':cstatus', 'N');
+//     $stmt->execute();
+//     if ($stmt->rowCount() > 0) {
+//     }
+
+// } catch (PDOException $e) {
+//     echo 'Unable to process query: ' . $e->getMessage();
+// }
+?>
+                            </form>
+
+                            <form action="Update/updCarDetails1.php" method="post">
                                 <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
                                 <input type="submit" value="Update" class="add">
                             </form>
@@ -75,9 +97,6 @@ WHERE cars.Status = "A";';
                         </div>
                     </div>
                     <?php
-                    // echo $row['PlateNo'].', '.$row['Brand'].', '.$row['Model'].', '.
-                    // $row['Year'].', '.$row['Status'].', '.$row['ClassName'].', '.
-                    // $row['MonthlyRate'].'$<br>';
             
                 }
                 //echo 'here';
@@ -88,21 +107,7 @@ WHERE cars.Status = "A";';
             }
 
             ?>
-            <div class="carCard">
-                <img src="" alt="Toyota Prius">
-                <h3>Toyota Prius</h3>
-                <p>Year: 2024 | Seats: 5</p>
-                <p class="price">Price/Day: <strong>€190.00</strong></p>
-                <button class="add">Add</button>
-            </div>
-
-            <div class="carCard">
-                <img src="" alt="Mercedes E-Class">
-                <h3>Mercedes E-Class</h3>
-                <p>Year: 2024 | Seats: 5</p>
-                <p class="price">Price/Day: <strong>€190.00</strong></p>
-                <button class="add">Add</button>
-            </div>
+            
 
 
 

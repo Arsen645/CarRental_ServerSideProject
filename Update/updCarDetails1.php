@@ -5,7 +5,7 @@ include '../header.html';
 
 try {
 
-    if (!isset($_POST['plateno']) ) {
+    if (!isset($_POST['ud_plate']) ) {
         die("No ID provided.");
     }
 
@@ -31,5 +31,6 @@ try {
     echo 'Unable to connect to the database server: ' . $e->getMessage();
 }
 
-include 'updateDetails.php';
+
+include 'updCarDetailsForm.php'
 ?>
