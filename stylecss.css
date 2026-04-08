@@ -1,4 +1,4 @@
-/* PDO::FETCH_ASSOC */
+
 
 * {
     margin: 0;
@@ -107,4 +107,44 @@ body {
     margin-top: 5px;
     cursor: pointer;
 }
+
+/************ forms */
+
+.formContainer {
+        width: 350px;
+        margin: 50px auto;
+        margin-top: 10em;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .formContainer h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .formContainer input, select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 1em;
+    }
+
+    .submitBtn {
+        width: 100%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .submitBtn:hover {
+        background-color: #0056b3;
+    }
+
+    
 

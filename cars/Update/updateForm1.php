@@ -1,7 +1,7 @@
 <?php
-include '../connection.php';
+include '../../connection.php';
 
-include '../header.html';
+include '../../header.html';
 
 try {
 
@@ -11,7 +11,7 @@ try {
 
     $sql = "SELECT * FROM cars WHERE plateno = :cplateno";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':cplateno', $_POST['plateno']);
+    $stmt->bindValue(':cplateno', $_POST['ud_plate']);
     $stmt->execute();
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,6 +31,5 @@ try {
     echo 'Unable to connect to the database server: ' . $e->getMessage();
 }
 
-
-include 'updCarDetailsForm.php'
+include 'updateDetails.php';
 ?>

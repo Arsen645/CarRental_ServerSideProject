@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="logo">FLEET RENTAL</div>
         <ul class="navLinks">
-            <li><a href="insert/addCar.php">Insert cars</a></li>
+            <li><a href="cars/addCar/addCar.php">Insert cars</a></li>
             <li><a href="insert/add.php">Insert carclass</a></li>
             <li><a href="insert/addCustomer.php">Insert customers</a></li>
             <li><a href="">Home</a></li>
@@ -21,6 +21,9 @@
             <li><a href="Delete/delete.php">delete car</a></li>
             <li><a href="myCars.php">my cars</a></li>
             <li><a href="" class="loginBtn">Register/Login</a></li>
+            <li><a href="customerHomePage.php" class="loginBtn">cusHomePage</a></li>
+
+
         </ul>
     </nav>
 
@@ -32,7 +35,7 @@
             <button class="browseBtn">BROWSE FLEET</button>
         </div>
     </section>
-
+ 
     <section class="ourCars">
 
 
@@ -49,6 +52,7 @@ JOIN carclass
 ON cars.carClass = carclass.className
 WHERE cars.Status = "A";';
                 $result = $pdo->prepare($sql);
+                
                 $result->execute();
                 if ($result->rowCount() == 0) {
                     echo "No cars found";
@@ -60,44 +64,28 @@ WHERE cars.Status = "A";';
                         <h3><?php echo $row['Brand'] . ' ' . $row['Model']; ?></h3>
                         <p>Class: <?php echo $row['ClassName'] ?></p>
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
+                        <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                         <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
                         <div class="buttonGroup">
                             <!-- <button class="add">Add</button> -->
                             <form action="addButton" method="post">
                                 <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
                                 <input type="submit" value="Add" class="add">
-                                <?php
-//                                 if (isset($_POST(addButton))
-// try {
-//     $sql = 'UPDATE cars 
-//             SET Status = :cstatus
-//             WHERE plateno = :cplate';
 
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->bindValue(':cplate', $row['PlateNo']);
-//     $stmt->bindValue(':cstatus', 'N');
-//     $stmt->execute();
-//     if ($stmt->rowCount() > 0) {
-//     }
-
-// } catch (PDOException $e) {
-//     echo 'Unable to process query: ' . $e->getMessage();
-// }
-?>
                             </form>
 
-                            <form action="Update/updCarDetails1.php" method="post">
-                                <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+                            <form action="cars/Update/updateForm1.php" method="post">
+                                <input type="hidden" name="ud_plate" value="<?= $row['PlateNo']; ?>">
                                 <input type="submit" value="Update" class="add">
                             </form>
-                            <form action="Delete/deletecar.php" method="post">
+                            <form action="cars/Delete/deletecar.php" method="post">
                                 <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
                                 <input type="submit" value="Delete" class="add">
                             </form>
                         </div>
                     </div>
                     <?php
-            
+
                 }
                 //echo 'here';
             } catch (PDOException $e) {
@@ -107,13 +95,80 @@ WHERE cars.Status = "A";';
             }
 
             ?>
-            
+
 
 
 
 
         </div>
     </section>
+    
+
+
+    <div>
+        <form action="" method="post">
+            <input type="text" name="csearch">
+            <input type="submit" name="search" value="search" class="add">
+        </form>
+    </div>
+
+    <div class="fleetGrid">
+
+    <?php
+    if (isset($_POST['search'])) {
+        $fromShow = true;
+        try {
+            $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
+    cars.Status,carclass.ClassName,carclass.MonthlyRate
+FROM cars
+JOIN carclass 
+ON cars.carClass = carclass.className
+WHERE cars.PlateNo LIKE :csearch;';
+            $result = $pdo->prepare($sql);
+            $result->bindValue(':csearch', '%' . $_POST['csearch'] . '%');
+            $result->execute();
+            if ($result->rowCount() == 0) {
+                echo "No cars found";
+            }
+            while ($row = $result->fetch()) {
+                ?>
+                <div class="carCard">
+                    <img src="images/carPlaceholder.avif" alt="Toyota Prius">
+                    <h3><?php echo $row['Brand'] . ' ' . $row['Model']; ?></h3>
+                    <p>Class: <?php echo $row['ClassName'] ?></p>
+                    <p>Year: <?php echo $row['YearManufactured'] ?></p>
+                    <p>Plate No: <?php echo $row['PlateNo'] ?></p>
+                    <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                    <div class="buttonGroup">
+                        <!-- <button class="add">Add</button> -->
+                        <form action="addButton" method="post">
+                            <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+                            <input type="submit" value="Add" class="add">
+
+                        </form>
+
+                        <form action="cars/Update/updateForm1.php" method="post">
+                            <input type="hidden" name="ud_plate" value="<?= $row['PlateNo']; ?>">
+                            <input type="submit" value="Update" class="add">
+                        </form>
+                        <form action="cars/Delete/deletecar.php" method="post">
+                            <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+                            <input type="submit" value="Delete" class="add">
+                        </form>
+                    </div>
+                </div>
+                <?php
+
+            }
+            //echo 'here';
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' .
+                $e->getLine();
+            echo 'Database error: ' . $e->getMessage();
+        }
+    }
+    ?>
+</div>
 
 </body>
 

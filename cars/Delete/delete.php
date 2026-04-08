@@ -1,6 +1,6 @@
 <?php
 
-include '../../header.html';
+include '../header.html';
 
 if (isset($_POST['submitdetails'])) {
 try {

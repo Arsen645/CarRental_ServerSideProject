@@ -1,6 +1,7 @@
-<?php include 'connection.php'
+<?php include 'connection.php';
+include 'customerHeader.html';
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +24,7 @@
                 <li><a href="" class="loginBtn">Register/Login</a></li>
             </ul>
         </nav>
-    
+     -->
 
     <!-- <section class="banner">
         <div class="bannerText">
