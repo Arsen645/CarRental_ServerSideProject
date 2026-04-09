@@ -1,7 +1,7 @@
 <?php include '../../connection.php'; 
  ?>
 <div class="formContainer">
-    <h2>Add a new carrr</h2>
+    <h2>Add a new car</h2>
 <form action="addCar.php" method="post">
     Plate Num: <input type="text" name="cplate" value=""> <br>
     <!-- Brand: <input type="text" name="cbrand"><br> -->

@@ -1,5 +1,5 @@
 <?php
-include '../header.html';
+include '../../header.html';
 if (isset($_POST['addCustomer'])) {                   
 try {  
 
@@ -34,5 +34,5 @@ catch (PDOException $e) {
     echo $output;
 } 
 } 
- include 'addCustomerform.html' 
+ include 'addCustomerform.php' 
  ?>

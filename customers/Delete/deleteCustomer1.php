@@ -6,20 +6,20 @@ if (isset($_POST['submitdetails'])) {
 try {
 $pdo = new PDO('mysql:host=localhost;dbname=CarRentalSys; charset=utf8', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = 'SELECT count(*) FROM cars where PlateNo = :cPlateNo';
+$sql = 'SELECT count(*) FROM customers where CustomerID = :cCustomerID';
 $result = $pdo->prepare($sql);
-$result->bindValue(':cPlateNo', $_POST['cPlateNo']);
+$result->bindValue(':cCustomerID', $_POST['CustomerID']);
 $result->execute();
 if($result->fetchColumn() > 0)
 {
-$sql = 'SELECT * FROM cars where PlateNo = :cPlateNo';
+$sql = 'SELECT * FROM customers where CustomerID = :cCustomerID';
 $result = $pdo->prepare($sql);
-$result->bindValue(':cPlateNo', $_POST['cPlateNo']);
+$result->bindValue(':cCustomerID', $_POST['CustomerID']);
 $result->execute();
 while ($row = $result->fetch()) {
-echo $row['Brand'] . ' ' . $row['Model'] . ' Are you sure you want to delete ??' .
-'<form action="deletecar.php" method="post">
-<input type="hidden" name="PlateNo" value="'.$row['PlateNo'].'">
+echo $row['CustomerID'] . ' ' . $row['CorporateName'] . ' Are you sure you want to delete ??' .
+'<form action="deleteCustomer3.php" method="post">
+<input type="hidden" name="CustomerID" value="'.$row['CustomerID'].'">
 <input type="submit" value="yes delete" name="delete">
 </form>';
 }
