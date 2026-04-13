@@ -14,13 +14,12 @@
         <div class="logo">FLEET RENTAL</div>
         <ul class="navLinks">
             <li><a href="cars/addCar/addCar.php">Insert cars</a></li>
-            <li><a href="carClasses/insert/addClass.php">Insert carclass</a></li>
+            <!-- <li><a href="carClasses/insert/addClass.php">Insert carclass</a></li> -->
             <li><a href="carClasses/classesTable.php">carclasses</a></li>
-            <li><a href="customers/InsertCustomer/addCustomer.php">Insert customers</a></li>
+            <li><a href="customers/selectUpdateCustTable.php">Customers</a></li>
             <li><a href="">Home</a></li>
-            <li><a href="cars/Delete/delete.php">delete car</a></li>
+            <!-- <li><a href="cars/Delete/delete.php">delete car</a></li> -->
             <li><a href="myCars.php">my cars</a></li>
-            <li><a href="" class="loginBtn">Register/Login</a></li>
             <li><a href="customerHomePage.php" class="loginBtn">cusHomePage</a></li>
 
 

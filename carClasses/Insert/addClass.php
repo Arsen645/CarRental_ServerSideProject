@@ -13,8 +13,6 @@ try {
         echo("You did not complete the insert form correctly <br> ");
                   }
 else{
-    $pdo = new PDO('mysql:host=localhost;dbname=CarRentalSys; charset=utf8', 'root', ''); 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   
     $sql = "INSERT INTO CarClass (classname,description,monthlyrate) 
     VALUES(:classname, :cdescription, :cmonthlyrate)";
     

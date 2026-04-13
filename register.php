@@ -24,12 +24,16 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['customerName'];
         $password = $_POST["password"];
+        $email = $_POST["email"];
+        $phone= $_POST["phone"];
         // Hash password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Insert into DB
         $stmt = $pdo->prepare("INSERT INTO users (name, password) VALUES (?, ?)");
+        $stmt2 = $pdo->prepare("INSERT INTO customers (CorporateName, Email, Phone) VALUES (?, ?, ?)");
         try {
             $stmt->execute([$name, $hashedPassword]);
+            $stmt2->execute([$name, $email, $phone]);
             echo "User registered successfully!";
         } catch (PDOException $e) {
             echo "Error: Email may already be in use.";
@@ -40,6 +44,9 @@
         <form method="POST">
             <input type="text" name="customerName" placeholder="Name" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
+
+            <input type="text" name="Email" placeholder="Email" required><br>
+            <input type="password" name="Phone" placeholder="Phone" required><br>
             <input type="submit" name="submit" value="Register" class="submitBtn"><br>
             <p>Have an account? <a href="login.php"> Log In</a></p>
         </form>
