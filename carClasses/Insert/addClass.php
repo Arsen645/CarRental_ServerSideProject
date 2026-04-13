@@ -1,6 +1,8 @@
 <?php
 include '../../header.html';
-if (isset($_POST['submitdetails'])) {                   
+include '../../connection.php';
+
+if (isset($_POST['submitdetails1'])) {                   
 try {  
     
     $classname = $_POST['classname'];

@@ -40,7 +40,8 @@
         <form method="POST">
             <input type="text" name="customerName" placeholder="Name" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
-            <input type="submit" name="submit" value="Register" class="submitBtn">
+            <input type="submit" name="submit" value="Register" class="submitBtn"><br>
+            <p>Have an account? <a href="login.php"> Log In</a></p>
         </form>
     </div>
 </body>

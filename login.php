@@ -47,7 +47,8 @@ echo "Invalid name or password";
 <form method="POST">
 <input type="text" name="customerName" placeholder="Name" required><br>
 <input type="password" name="password" placeholder="Password" required><br>
-<input type="submit" name="submit" value="Login" class="submitBtn">
+<input type="submit" name="submit" value="Login" class="submitBtn"><br>
+  <p>Don't have an account? <a href="register.php"> Sign Up</a></p>
 </form>
 </div>
 </body>

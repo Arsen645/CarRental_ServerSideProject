@@ -12,12 +12,15 @@ try {
     <h1>Customers </h1><br><br>
 </section>
 
+
     <table border="1">
         <tr>
             <th>CustomerID</th>
             <th>CorporateName</th>
             <th>Email</th>
             <th>Phone</th>
+
+            
         </tr>
 
         <?php if ($result->rowCount() > 0): ?>
@@ -45,6 +48,7 @@ try {
             <tr><td colspan="2">No customers found</td></tr>
         <?php endif; ?>
     </table>
+    
 
 <?php
 } catch (PDOException $e) {

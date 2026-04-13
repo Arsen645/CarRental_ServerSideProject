@@ -24,7 +24,7 @@
         ClassName: <input type="text" name="classname"><br>
         Description: <input type="text" name="cdescription" value=""><br>
         MonthlyRate: <input type="text" name="cmonthlyrate"><br>
-        <input type="submit" name="submitdetails" value="SUBMIT" class="submitBtn">
+        <input type="submit" name="submitdetails1" value="SUBMIT" class="submitBtn">
     </form>
 
 </div>

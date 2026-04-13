@@ -15,8 +15,8 @@
         <ul class="navLinks">
             <li><a href="cars/addCar/addCar.php">Insert cars</a></li>
             <li><a href="carClasses/insert/addClass.php">Insert carclass</a></li>
+            <li><a href="carClasses/classesTable.php">carclasses</a></li>
             <li><a href="customers/InsertCustomer/addCustomer.php">Insert customers</a></li>
-            <li><a href="customers/selectUpdateCustTable.php">Update customers</a></li>
             <li><a href="">Home</a></li>
             <li><a href="cars/Delete/delete.php">delete car</a></li>
             <li><a href="myCars.php">my cars</a></li>
@@ -74,12 +74,7 @@ WHERE cars.Status = "A" OR cars.Status = "C";';
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                         <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
                         <div class="buttonGroup">
-                            <!-- <button class="add">Add</button> -->
-                            <form action="addButton" method="post">
-                                <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
-                                <input type="submit" value="Add" class="add">
-
-                            </form>
+                            
 
                             <form action="cars/Update/updateForm1.php" method="post">
                                 <input type="hidden" name="ud_plate" value="<?= $row['PlateNo']; ?>">
