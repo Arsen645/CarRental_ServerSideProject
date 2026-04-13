@@ -34,6 +34,7 @@ WHERE cars.Status = "N";';
                     <p>Year:
                         <?php echo $row['YearManufactured'] ?>
                     </p>
+                    <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                     <p class="price">Price:
                         <?php echo $row['MonthlyRate']; ?>€
                     </p>
@@ -113,6 +114,7 @@ WHERE cars.Status = "C";';
                         <p>Year:
                             <?php echo $row['YearManufactured'] ?>
                         </p>
+                        <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                         <p class="price">Price:
                             <?php echo $row['MonthlyRate']; ?>€
                         </p>
@@ -167,23 +169,16 @@ WHERE cars.Status = "C";';
             
 
                     // add rental record
-                    $sql = "INSERT INTO rentals (CustomerID,StartDate,Status) 
-            VALUES(:cCustomerID, :cStartDate,:cstatus)";
+                    $sql = "INSERT INTO rentals (CustomerID,StartDate,Status,CarPlateNo) 
+            VALUES(:cCustomerID, :cStartDate,:cstatus, :cCarPlateNo)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(':cCustomerID', 1);
-                    $stmt->bindValue(':cStartDate', date('d-m-y'));
+                    $stmt->bindValue(':cStartDate', date('Y-m-d'));
                     $stmt->bindValue(':cstatus', 'A'); //status A = Active
+                    $stmt->bindValue(':cCarPlateNo', $_POST['plateno']);
             
                     $stmt->execute();
-                    $rentalID = (int) $pdo->lastInsertId();
-                    //add rentalcar record
-                    $sql = "INSERT INTO rentalcars (RentID,PlateNo) 
-            VALUES(:cRentID, :cPlateNo)";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(':cRentID', $rentalID);
-                    $stmt->bindValue(':cPlateNo', $_POST['plateno']);
-
-                    $stmt->execute();
+                    
 
                 } catch (PDOException $e) {
                     echo 'Unable to process query: ' . $e->getMessage();
@@ -207,31 +202,17 @@ WHERE cars.Status = "C";';
                     $stmt->bindValue(':cplate', $_POST['plateno']);
                     $stmt->execute();
 
-                    $sql = 'SELECT * 
-                    FROM rentalcars 
-                    WHERE PlateNo = :cPlate';
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(':cplate', $_POST['plateno']);
-                    $result = $pdo->query($sql);
-
-                    if ($result->rowCount() > 0):
+                    
 
 
-
-                        while ($row = $result->fetch(PDO::FETCH_ASSOC)):
-
-                            $plate = $row['RentID'];
-                        endwhile;
-                    endif;
-
-
-                    // add rental record
+                    // add finish date to rental record
                     $sql = "UPDATE rentals 
         SET FinishDate = :cFinishDate, Status = :cstatus
-        WHERE RentID = :cRentID";
+        WHERE CarPlateNo = :cplate AND FinishDate IS NULL";
             $stmt = $pdo -> prepare($sql);
-            $stmt->bindValue(':cFinishDate', date('d-m-y'));
+            $stmt->bindValue(':cFinishDate', date('Y-m-d'));
             $stmt->bindValue(':cstatus', 'N'); //status N == Not Active
+            $stmt->bindValue(':cplate', $_POST['plateno']);
             
                     $stmt->execute();
                     $rentalID = (int) $pdo->lastInsertId();
