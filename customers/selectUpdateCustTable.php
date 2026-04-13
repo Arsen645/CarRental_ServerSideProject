@@ -8,7 +8,9 @@ try {
     $sql = 'SELECT * FROM customers';
     $result = $pdo->query($sql);
 ?>
-    <b>A Quick View</b><br><br>
+<section class="ourCars">
+    <h1>Customers </h1><br><br>
+</section>
 
     <table border="1">
         <tr>

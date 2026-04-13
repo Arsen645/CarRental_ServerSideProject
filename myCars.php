@@ -25,18 +25,26 @@ WHERE cars.Status = "N";';
                 ?>
                 <div class="carCard">
                     <img src="images/carPlaceholder.avif" alt="Toyota Prius">
-                    <h3><?php echo $row['Brand'] . ' ' . $row['Model']; ?></h3>
-                    <p>Class: <?php echo $row['ClassName'] ?></p>
-                    <p>Year: <?php echo $row['YearManufactured'] ?></p>
-                    <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                    <h3>
+                        <?php echo $row['Brand'] . ' ' . $row['Model']; ?>
+                    </h3>
+                    <p>Class:
+                        <?php echo $row['ClassName'] ?>
+                    </p>
+                    <p>Year:
+                        <?php echo $row['YearManufactured'] ?>
+                    </p>
+                    <p class="price">Price:
+                        <?php echo $row['MonthlyRate']; ?>€
+                    </p>
                     <div class="buttonGroup">
 
-                        
+
                         <form action="" method="post">
                             <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
                             <input type="submit" value="Remove" class="add" name="remove">
                         </form>
-                        
+
                     </div>
                 </div>
                 <?php
@@ -96,14 +104,22 @@ WHERE cars.Status = "C";';
                     ?>
                     <div class="carCard">
                         <img src="images/carPlaceholder.avif" alt="Toyota Prius">
-                        <h3><?php echo $row['Brand'] . ' ' . $row['Model']; ?></h3>
-                        <p>Class: <?php echo $row['ClassName'] ?></p>
-                        <p>Year: <?php echo $row['YearManufactured'] ?></p>
-                        <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                        <h3>
+                            <?php echo $row['Brand'] . ' ' . $row['Model']; ?>
+                        </h3>
+                        <p>Class:
+                            <?php echo $row['ClassName'] ?>
+                        </p>
+                        <p>Year:
+                            <?php echo $row['YearManufactured'] ?>
+                        </p>
+                        <p class="price">Price:
+                            <?php echo $row['MonthlyRate']; ?>€
+                        </p>
                         <div class="buttonGroup">
                             <form action="" method="post">
                                 <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
-                                <input type="submit" value="Add" class="add" name="add">
+                                <input type="submit" value="Add to rentals" class="add" name="add">
 
                             </form>
                             <form action="" method="post">
@@ -150,6 +166,25 @@ WHERE cars.Status = "C";';
                     //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
             
 
+                    // add rental record
+                    $sql = "INSERT INTO rentals (CustomerID,StartDate,Status) 
+            VALUES(:cCustomerID, :cStartDate,:cstatus)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindValue(':cCustomerID', 1);
+                    $stmt->bindValue(':cStartDate', date('d-m-y'));
+                    $stmt->bindValue(':cstatus', 'A'); //status A = Active
+            
+                    $stmt->execute();
+                    $rentalID = (int) $pdo->lastInsertId();
+                    //add rentalcar record
+                    $sql = "INSERT INTO rentalcars (RentID,PlateNo) 
+            VALUES(:cRentID, :cPlateNo)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindValue(':cRentID', $rentalID);
+                    $stmt->bindValue(':cPlateNo', $_POST['plateno']);
+
+                    $stmt->execute();
+
                 } catch (PDOException $e) {
                     echo 'Unable to process query: ' . $e->getMessage();
                 }
@@ -169,14 +204,45 @@ WHERE cars.Status = "C";';
 
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(':cstatus', 'A');
-                    $stmt->bindValue(':cplate', $_POST['cplateno']);
+                    $stmt->bindValue(':cplate', $_POST['plateno']);
                     $stmt->execute();
-                    //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
+
+                    $sql = 'SELECT * 
+                    FROM rentalcars 
+                    WHERE PlateNo = :cPlate';
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindValue(':cplate', $_POST['plateno']);
+                    $result = $pdo->query($sql);
+
+                    if ($result->rowCount() > 0):
+
+
+
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)):
+
+                            $plate = $row['RentID'];
+                        endwhile;
+                    endif;
+
+
+                    // add rental record
+                    $sql = "UPDATE rentals 
+        SET FinishDate = :cFinishDate, Status = :cstatus
+        WHERE RentID = :cRentID";
+            $stmt = $pdo -> prepare($sql);
+            $stmt->bindValue(':cFinishDate', date('d-m-y'));
+            $stmt->bindValue(':cstatus', 'N'); //status N == Not Active
             
+                    $stmt->execute();
+                    $rentalID = (int) $pdo->lastInsertId();
 
                 } catch (PDOException $e) {
                     echo 'Unable to process query: ' . $e->getMessage();
                 }
+
+
+
+
 
             }
             ?>
