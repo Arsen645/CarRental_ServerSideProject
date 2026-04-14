@@ -5,8 +5,10 @@ include 'customerHeader.html';
 
 
     <div class="searchBar">
-        <form action="searchPage.php" method="post">
+        <form action="" method="post">
             <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
+            From: <input type="date" name="cStartDate" class="searchDate">
+            To: <input type="date" name="cFinishDate" class="searchDate">
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>
@@ -20,16 +22,26 @@ include 'customerHeader.html';
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
     carclass.ClassName,carclass.MonthlyRate, carclass.Description
 FROM cars
-JOIN carclass 
+JOIN carclass
 ON cars.carClass = carclass.className
-WHERE cars.PlateNo LIKE :csearch
+WHERE cars.Status != "D"
+AND (cars.PlateNo LIKE :csearch
 OR cars.Brand LIKE :csearch
 OR cars.Model Like :csearch
 OR cars.YearManufactured LIKE :csearch
 OR carclass.Description LIKE :csearch
-OR carclass.ClassName LIKE :csearch;';
+OR carclass.ClassName LIKE :csearch)
+AND NOT EXISTS (
+    SELECT *
+    FROM rentals
+    WHERE rentals.CarPlateNo = cars.PlateNo
+    AND rentals.StartDate < :cfinish
+    AND rentals.FinishDate > :cstart
+    );';
             $result = $pdo->prepare($sql);
             $result->bindValue(':csearch', '%' . $_POST['csearch'] . '%');
+            $result->bindValue(':cfinish', $_POST['cFinishDate'] );
+            $result->bindValue(':cstart', $_POST['cStartDate'] );
             $result->execute();
             if ($result->rowCount() == 0) {
                 echo "No cars found";
@@ -47,12 +59,9 @@ OR carclass.ClassName LIKE :csearch;';
                             <!-- <button class="add">Add</button> -->
                             <form action="" method="post">
                                 <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
-                                <input type="submit" value="Add" class="add"  name="add">
-                          
-                            </form>
-                            <form action="" method="post">
-                                <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
-                                <input type="submit" value="To Basket" class="add"  name="basket">
+                                <input type="hidden" name="cStartDate" value="<?= $_POST['cStartDate']; ?>">
+                                <input type="hidden" name="cFinishDate" value="<?= $_POST['cFinishDate']; ?>">
+                                <input type="submit" value="Rent" class="add"  name="add">
                           
                             </form>
                         </div>
@@ -69,7 +78,44 @@ OR carclass.ClassName LIKE :csearch;';
     }
     ?>
 </div>
+<?php
 
+
+
+
+if (isset($_POST['add'])) {
+
+                try {
+
+                    $sql = 'UPDATE cars 
+            SET Status = :cstatus
+            WHERE plateno = :cplate';
+
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindValue(':cstatus', 'N');//N - not available. means car is renting
+                    $stmt->bindValue(':cplate', $_POST['plateno']);
+                    $stmt->execute();
+                    //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
+            
+
+                    // add rental record
+                    $sql = "INSERT INTO rentals (CustomerID,StartDate,FinishDate,CarPlateNo) 
+            VALUES(:cCustomerID, :cStartDate, :cFinishDate, :cCarPlateNo)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindValue(':cCustomerID', 5);
+                    $stmt->bindValue(':cStartDate', $_POST['cStartDate']);
+                    $stmt->bindValue(':cFinishDate', $_POST['cFinishDate'] );
+                    $stmt->bindValue(':cCarPlateNo', $_POST['plateno']);
+            
+                    $stmt->execute();
+                    
+
+                } catch (PDOException $e) {
+                    echo 'Unable to process query: ' . $e->getMessage();
+                }
+
+            }
+?>
 </body>
 
 </html>

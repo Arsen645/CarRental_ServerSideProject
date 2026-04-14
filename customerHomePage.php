@@ -33,6 +33,8 @@
     <div class="searchBar">
         <form action="CustSearchPage.php" method="post">
             <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
+            From: <input type="date" name="cStartDate" class="searchDate">
+            To: <input type="date" name="cFinishDate" class="searchDate">
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>
@@ -66,19 +68,19 @@ WHERE cars.Status = "A";';
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                         <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
-                        <div class="buttonGroup">
-                            <!-- <button class="add">Add</button> -->
+                        <!-- <div class="buttonGroup">
+                             <button class="add">Add</button> 
                             <form action="" method="post">
-                                <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+                                <input type="hidden" name="plateno" value="<?php //$row['PlateNo']; ?>">
                                 <input type="submit" value="Add" class="add"  name="add">
                           
                             </form>
                             <form action="" method="post">
-                                <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
+                                <input type="hidden" name="plateno" value="<?php //$row['PlateNo']; ?>">
                                 <input type="submit" value="To Basket" class="add"  name="basket">
                           
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <?php
             

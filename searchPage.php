@@ -12,28 +12,14 @@
 <body>
 
 
-    <nav class="navbar">
-        <div class="logo">FLEET RENTAL</div>
-        <ul class="navLinks">
-            <li><a href="cars/addCar/addCar.php">Insert cars</a></li>
-            <li><a href="insert/add.php">Insert carclass</a></li>
-            <li><a href="insert/addCustomer.php">Insert customers</a></li>
-            <li><a href="/arsen/CarRental_ServerSideProject/qindex.php">Home</a></li>
-            <li><a href="myCars.php">my cars</a></li>
-            <li><a href="" class="loginBtn">Register/Login</a></li>
-            <li><a href="customerHomePage.php" class="loginBtn">cusHomePage</a></li>
-
-
-        </ul>
-    </nav>
+    <?php include 'admNavbar.php'; ?>
     
 
 
     <div class="searchBar">
         <form action="searchPage.php" method="post">
             <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
-            From: <input type="date" name="cStartDate" class="searchDate">
-            To: <input type="date" name="cFinishDate" class="searchDate">
+            
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>
@@ -44,17 +30,18 @@
     if (isset($_POST['search'])) {
         $fromShow = true;
         try {
-            $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
+            $sql = "SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
     cars.Status,carclass.ClassName,carclass.MonthlyRate, carclass.Description
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
-WHERE cars.PlateNo LIKE :csearch
+WHERE cars.Status != 'D' 
+AND (cars.PlateNo LIKE :csearch
 OR cars.Brand LIKE :csearch
 OR cars.Model Like :csearch
 OR cars.YearManufactured LIKE :csearch
 OR carclass.Description LIKE :csearch
-OR carclass.ClassName LIKE :csearch;';
+OR carclass.ClassName LIKE :csearch);";
             $result = $pdo->prepare($sql);
             $result->bindValue(':csearch', '%' . $_POST['csearch'] . '%');
             $result->execute();
