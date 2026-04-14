@@ -18,7 +18,7 @@ include 'customerHeader.html';
         $fromShow = true;
         try {
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate, carclass.Description
+    carclass.ClassName,carclass.MonthlyRate, carclass.Description
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
