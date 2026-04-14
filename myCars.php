@@ -11,14 +11,19 @@ include 'customerHeader.html';
         try {
 
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate
+    cars.Status,carclass.ClassName,carclass.MonthlyRate,rentals.StartDate,
+    rentals.FinishDate
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
-WHERE cars.Status = "N";';//not available for renting. means currently renting
+JOIN rentals 
+ON rentals.CarPlateNo = cars.PlateNo
+WHERE rentals.CustomerID = :customerId
+AND rentals.FinishDate >= CURDATE();';
             $result = $pdo->prepare($sql);
+            $result->bindValue(':customerId', 5);
             $result->execute();
-            if ($result->rowCount() == 0) {
+            if ($result->rowCount() == 0) { 
                 echo "No cars found";
             }
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -35,8 +40,14 @@ WHERE cars.Status = "N";';//not available for renting. means currently renting
                         <?php echo $row['YearManufactured'] ?>
                     </p>
                     <p>Plate No: <?php echo $row['PlateNo'] ?></p>
-                    <p class="price">Price:
+                    <p class="price">Price per day:
                         <?php echo $row['MonthlyRate']; ?>€
+                    </p>
+                    <p>Rent from:
+                        <?php echo date("d-m", strtotime($row['StartDate'])) ?>
+                    </p>
+                    <p>to:
+                        <?php echo date("d-m", strtotime($row['FinishDate'])) ?>
                     </p>
                     <div class="buttonGroup">
 
@@ -64,22 +75,22 @@ WHERE cars.Status = "N";';//not available for renting. means currently renting
 
     </div>
 </section>
-<section class="myTotals">
+<!-- <section class="myTotals">
     <h2>total rent:
         <?php
-        $sql = 'SELECT sum(carclass.MonthlyRate) as totalRent
-FROM cars
-JOIN carclass 
-ON cars.carClass = carclass.ClassName
-WHERE cars.Status = "N";';
-        $result = $pdo->prepare($sql);
-        $result->execute();
-        $row = $result->fetch(PDO::FETCH_ASSOC);
-        echo $row['totalRent'];
+//         $sql = 'SELECT sum(carclass.MonthlyRate) as totalRent
+// FROM cars
+// JOIN carclass 
+// ON cars.carClass = carclass.ClassName
+// WHERE cars.Status = "N";';
+//         $result = $pdo->prepare($sql);
+//         $result->execute();
+//         $row = $result->fetch(PDO::FETCH_ASSOC);
+//         echo $row['totalRent'];
         ?>
         €
     </h2>
-
+</section> -->
 
 
 

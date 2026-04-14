@@ -13,7 +13,7 @@ try {
 </section>
 
 
-    <table border="1">
+    <table>
         <tr>
             <th>ClassID</th>
             <th>ClassName</th>

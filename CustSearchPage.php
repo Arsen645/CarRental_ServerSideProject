@@ -87,16 +87,6 @@ if (isset($_POST['add'])) {
 
                 try {
 
-                    $sql = 'UPDATE cars 
-            SET Status = :cstatus
-            WHERE plateno = :cplate';
-
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(':cstatus', 'N');//N - not available. means car is renting
-                    $stmt->bindValue(':cplate', $_POST['plateno']);
-                    $stmt->execute();
-                    //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
-            
 
                     // add rental record
                     $sql = "INSERT INTO rentals (CustomerID,StartDate,FinishDate,CarPlateNo) 

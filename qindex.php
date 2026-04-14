@@ -37,12 +37,13 @@
             try {
                 $pdo = new PDO('mysql:host=localhost;dbname=carRentalSys; charset=utf8', 'root', '');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
+                $sql = "SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
     cars.Status,carclass.ClassName,carclass.MonthlyRate
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
-WHERE cars.Status = "A" OR cars.Status = "C";';
+WHERE cars.Status != 'D' ;"; // D - means deleted. For soft delete
+
                 $result = $pdo->prepare($sql);
 
                 $result->execute();

@@ -14,13 +14,16 @@ try {
     $stmt->bindValue(':cCorporateName', $_POST['CorporateName']);
     $stmt->execute();
 //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
+?> <p class="confirmation"> <?php
     if ($stmt->rowCount() > 0) {
+        
         echo "You just updated customer: " . $_POST['CustomerID'] .
              " � click <a href='/arsen/CarRental_ServerSideProject/qindex.php'>here</a> to go back";
     } else {
         echo "Nothing updated (either no such customer, or values were unchanged).".
              " � click <a href='/arsen/CarRental_ServerSideProject/qindex.php'>here</a> to go back";
     }
+    ?> </p> <?php
 
 } catch (PDOException $e) {
     echo 'Unable to process query: ' . $e->getMessage();
