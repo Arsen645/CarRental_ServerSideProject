@@ -13,7 +13,7 @@ try {
 </section>
 
 
-    <table >
+    <table>
         <tr>
             <th>CustomerID</th>
             <th>CorporateName</th>
