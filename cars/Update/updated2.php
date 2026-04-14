@@ -1,7 +1,6 @@
 <?php
+include '../../connection.php';
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=carrentalsys;charset=utf8', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'UPDATE cars 
             SET Brand = :cbrand, Model = :cmodel, Status = :cstatus, carClass = :ccarClass 
