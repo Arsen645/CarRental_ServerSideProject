@@ -199,7 +199,7 @@ WHERE cars.Status = "C";';
 
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(':cstatus', 'A');
-                    $stmt->bindValue(':cplate', $_POST['plateno']);
+                    $stmt->bindValue(':cplate', $_POST['cplateno']);
                     $stmt->execute();
 
                     
@@ -212,7 +212,7 @@ WHERE cars.Status = "C";';
             $stmt = $pdo -> prepare($sql);
             $stmt->bindValue(':cFinishDate', date('Y-m-d'));
             $stmt->bindValue(':cstatus', 'N'); //status N == Not Active
-            $stmt->bindValue(':cplate', $_POST['plateno']);
+            $stmt->bindValue(':cplate', $_POST['cplateno']);
             
                     $stmt->execute();
                     $rentalID = (int) $pdo->lastInsertId();

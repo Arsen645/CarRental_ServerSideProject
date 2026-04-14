@@ -29,11 +29,11 @@ try {
 
             <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><?= htmlspecialchars($row['CustomerID']) ?></td>
-                    <td><?= htmlspecialchars($row['CorporateName']) ?></td>
-                    <td><?= htmlspecialchars($row['Email']) ?></td>
-                    <td><?= htmlspecialchars($row['Phone']) ?></td>
-                    <td><form action="Update/updateForm1.php" method="post">
+                    <td><?= ($row['CustomerID']) ?></td>
+                    <td><?= ($row['CorporateName']) ?></td>
+                    <td><?= ($row['Email']) ?></td>
+                    <td><?= ($row['Phone']) ?></td>
+                    <td><form action="updateCustomer/updateCustomerForm1.php" method="post">
                                 <input type="hidden" name="CustomerID" value="<?= $row['CustomerID']; ?>">
                                 <input type="submit" value="Update" class="add">
                             </form></td>

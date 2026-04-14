@@ -9,19 +9,18 @@ try {
         die("No ID provided.");
     }
 
-    $sql = "SELECT * FROM cars WHERE plateno = :cplateno";
+    $sql = "SELECT * FROM carclass WHERE ClassID = :cClassID";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':cplateno', $_POST['ClassID']);
+    $stmt->bindValue(':cClassID', $_POST['ClassID']);
     $stmt->execute();
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        $plateno = $row['PlateNo'];
-        $brand = $row['Brand'];
-        $model = $row['Model'];
-        $status = $row['Status'];
-        $carClass = $row['carClass'];
+        $ClassID = $row['ClassID'];
+        $ClassName = $row['ClassName'];
+        $Description = $row['Description'];
+        $MonthlyRate = $row['MonthlyRate'];
     } 
     else {
         echo "No rows matched the query. Try again <a href='selectupdate.php'>here</a>";

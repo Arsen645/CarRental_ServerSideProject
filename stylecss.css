@@ -164,7 +164,12 @@ select {
     padding: 10px 14px;
     border: 1px solid #ccc;
     border-radius: 15px;
-    width: 90%;
+    width: 50%;
+}
+.searchBar .searchDate {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
 }
 
 .searchBar .searchButton {

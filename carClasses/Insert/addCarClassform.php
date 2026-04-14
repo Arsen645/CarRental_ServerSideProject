@@ -15,7 +15,7 @@
         $row = $result->fetch(PDO::FETCH_ASSOC);
 
         if ($row && $row['maxId'] !== null) {
-            echo $row['maxId'];
+            echo $row['maxId']+1;
         } else {
             echo "No data found!";
         }

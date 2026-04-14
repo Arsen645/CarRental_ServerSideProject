@@ -5,13 +5,13 @@ include '../../header.html';
 
 try {
 
-    if (!isset($_POST['custid']) ) {
+    if (!isset($_POST['CustomerID']) ) {
         die("No ID provided.");
     }
 
     $sql = "SELECT * FROM customers WHERE customerid = :ccustid";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':ccustid', $_POST['custid']);
+    $stmt->bindValue(':ccustid', $_POST['CustomerID']);
     $stmt->execute();
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);

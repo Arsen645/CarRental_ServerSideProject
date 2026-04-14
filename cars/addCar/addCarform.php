@@ -5,7 +5,7 @@
 <form action="addCar.php" method="post">
     Plate Num: <input type="text" name="cplate" value=""> <br>
     <!-- Brand: <input type="text" name="cbrand"><br> -->
-    Brand: <select name="cbrand" style="width: 100%;" onchange="this.form.submit()">  ////link (show only models of selected brand)
+    Brand: <select name="cbrand" style="width: 100%;" onchange="this.form.submit()" value = <?php echo $_POST['cbrand'] ?>>  ////link (show only models of selected brand)onchange="this.form.submit()"
         <?php
         $flag = 0;
         $selectedBrandId = isset($_POST['cbrand']) ? $_POST['cbrand'] : '';  ////link (show only models of selected brand)

@@ -32,6 +32,8 @@
     <div class="searchBar">
         <form action="searchPage.php" method="post">
             <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
+            From: <input type="date" name="cStartDate" class="searchDate">
+            To: <input type="date" name="cFinishDate" class="searchDate">
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>
@@ -43,7 +45,7 @@
         $fromShow = true;
         try {
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate
+    cars.Status,carclass.ClassName,carclass.MonthlyRate, carclass.Description
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
@@ -51,6 +53,7 @@ WHERE cars.PlateNo LIKE :csearch
 OR cars.Brand LIKE :csearch
 OR cars.Model Like :csearch
 OR cars.YearManufactured LIKE :csearch
+OR carclass.Description LIKE :csearch
 OR carclass.ClassName LIKE :csearch;';
             $result = $pdo->prepare($sql);
             $result->bindValue(':csearch', '%' . $_POST['csearch'] . '%');
