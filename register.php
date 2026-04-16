@@ -1,5 +1,5 @@
 <?php include 'connection.php';
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -21,11 +21,18 @@
 
 
     <?php
+    $id = 0;
+
+    $name;
+        $password;
+        $email;
+        $phone;
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['customerName'];
         $password = $_POST["password"];
-        // $email = $_POST["email"];
-        // $phone= $_POST["phone"];
+        $email = $_POST["email"];
+        $phone= $_POST["phone"];
         // Hash password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Insert into DB
@@ -36,8 +43,32 @@
             // $stmt2->execute([$name, $email, $phone]);
             echo "User registered successfully!";
         } catch (PDOException $e) {
-            echo "Error 1." . $e;
+            echo "Error " . $e;
         }
+
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE name = :cname");
+
+        try {
+            $stmt->bindValue(':cname', $name);
+            $stmt->execute();
+
+            if($stmt->rowCount()>0) {
+                $row = $stmt->fetch((PDO::FETCH_ASSOC));
+                $id = $row['id'];
+            }
+        } catch {
+            echo 'Database error: ' . $e->getMessage();
+        }   
+
+        try {
+            $stmt2 = $pdo->prepare("INSERT INTO customers (CustomerID, CorporateName, Email, Phone) VALUES (?, ?, ?, ?)");
+            $stmt2->execute([$id, $name, $email, $phone]);
+            echo "User registered successfully!";
+        } catch (PDOException $e) {
+            echo "Error " . $e;
+        }
+
+
     }
     ?>
     <div class="formContainer">
@@ -45,8 +76,10 @@
             <input type="text" name="customerName" placeholder="Name" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
 
-            <!-- <input type="text" name="Email" placeholder="Email" required><br> -->
-            <!-- <input type="password" name="Phone" placeholder="Phone" required><br> -->
+            <input type="text" name="Email" placeholder="Email" required><br>
+            <input type="password" name="Phone" placeholder="Phone" required><br>
+
+
             <input type="submit" name="submit" value="Register" class="submitBtn"><br>
             <p>Have an account? <a href="login.php"> Log In</a></p>
         </form>

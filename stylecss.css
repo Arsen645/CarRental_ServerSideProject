@@ -155,6 +155,7 @@ select {
     margin-top: 2em;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 .searchBar form {
     width: 100%;

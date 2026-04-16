@@ -6,7 +6,6 @@
             <li><a href="customers/selectUpdateCustTable.php">Customers</a></li>
             <li><a href="rentals/rentalsTable.php">Rentals </a></li>
             <li><a href="/arsen/CarRental_ServerSideProject/qindex.php">Home</a></li>
-            <li><a href="myCars.php">my cars</a></li>
             <li><a href="customerHomePage.php" class="loginBtn">cusHomePage</a></li>
 
 

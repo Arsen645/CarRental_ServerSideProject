@@ -33,7 +33,9 @@ $user = $stmt->fetch();
 
 if ($user && password_verify($password, $user['password'])) {
 $_SESSION['user_id'] = $user['id'];
+if ($_SESSION['user_id'] == 101) {
 
+}
 echo "Login successfull";
 
 } else {
@@ -47,6 +49,9 @@ echo "Invalid name or password";
 <form method="POST">
 <input type="text" name="customerName" placeholder="Name" required><br>
 <input type="password" name="password" placeholder="Password" required><br>
+
+
+
 <input type="submit" name="submit" value="Login" class="submitBtn"><br>
   <p>Don't have an account? <a href="register.php"> Sign Up</a></p>
 </form>

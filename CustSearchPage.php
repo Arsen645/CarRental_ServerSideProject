@@ -16,6 +16,7 @@ include 'customerHeader.html';
     <div class="fleetGrid">
 
     <?php
+    
     if (isset($_POST['search'])) {
         $fromShow = true;
         try {

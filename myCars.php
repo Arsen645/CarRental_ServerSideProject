@@ -1,5 +1,8 @@
 <?php include 'connection.php';
 include 'customerHeader.html';
+session_start();
+$cutsId = $_SESSION['user_id'];
+
 ?>
 
 <section class="ourCars">
@@ -21,7 +24,7 @@ ON rentals.CarPlateNo = cars.PlateNo
 WHERE rentals.CustomerID = :customerId
 AND rentals.FinishDate >= CURDATE();';
             $result = $pdo->prepare($sql);
-            $result->bindValue(':customerId', 5);
+            $result->bindValue(':customerId', $cutsId);
             $result->execute();
             if ($result->rowCount() == 0) { 
                 echo "No cars found";
