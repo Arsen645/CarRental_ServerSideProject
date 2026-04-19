@@ -34,7 +34,7 @@ $flag = 1;
 Model: <select name="ud_model" style="width: 100%;" required>
         <?php
         if ($flag == 1) {
-        $sql = 'SELECT modelname
+        $sql = 'SELECT modelname 
                 FROM model
                 WHERE brandid = :cbrandid';
         $result = $pdo->prepare($sql);

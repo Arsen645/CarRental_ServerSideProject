@@ -1,9 +1,11 @@
-
-
-
     <?php
     include '../registerNavbar.php';
-    
+    //htmlspecialchars(trim(
+    funciton isValidPhone ($phone) {
+        $pattern = '/^\+?\d{9}$/';
+        $result = preg_match($pattern, $phone);
+        return $result;
+    }
     $id = 0;
 
     $name;
@@ -12,10 +14,11 @@
         $phone;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $name = $_POST['customerName'];
-        $password = $_POST["password"];
-        $email = $_POST["email"];
-        $phone= $_POST["phone"];
+        $name = htmlspecialchars(trim($_POST['customerName']));
+        $password = htmlspecialchars(trim($_POST["password"]));
+        $email = htmlspecialchars(trim($_POST["email"]));
+        $phone= htmlspecialchars(trim($_POST["phone"]));
+        
         // Hash password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Insert into DB
