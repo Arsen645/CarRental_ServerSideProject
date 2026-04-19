@@ -14,7 +14,7 @@ $cutsId = $_SESSION['user_id'];
         try {
 
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate,rentals.StartDate,
+    cars.Status,carclass.ClassName,carclass.Rate,rentals.StartDate,
     rentals.FinishDate
 FROM cars
 JOIN carclass 
@@ -44,7 +44,7 @@ AND rentals.FinishDate >= CURDATE();';
                     </p>
                     <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                     <p class="price">Price per day:
-                        <?php echo $row['MonthlyRate']; ?>€
+                        <?php echo $row['Rate']; ?>€
                     </p>
                     <p>Rent from:
                         <?php echo date("d-m", strtotime($row['StartDate'])) ?>
@@ -81,7 +81,7 @@ AND rentals.FinishDate >= CURDATE();';
 <!-- <section class="myTotals">
     <h2>total rent:
         <?php
-//         $sql = 'SELECT sum(carclass.MonthlyRate) as totalRent
+//         $sql = 'SELECT sum(carclass.Rate) as totalRent
 // FROM cars
 // JOIN carclass 
 // ON cars.carClass = carclass.ClassName

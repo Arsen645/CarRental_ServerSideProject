@@ -23,7 +23,7 @@
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>
-
+<section class="ourCars">
     <div class="fleetGrid">
 
     <?php
@@ -31,7 +31,7 @@
         $fromShow = true;
         try {
             $sql = "SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate, carclass.Description
+    cars.Status,carclass.ClassName,carclass.Rate, carclass.Description
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
@@ -56,7 +56,7 @@ OR carclass.ClassName LIKE :csearch);";
                     <p>Class: <?php echo $row['ClassName'] ?></p>
                     <p>Year: <?php echo $row['YearManufactured'] ?></p>
                     <p>Plate No: <?php echo $row['PlateNo'] ?></p>
-                    <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                    <p class="price">Price: <?php echo $row['Rate']; ?>€ </p>
                     <div class="buttonGroup">
                         <!-- <button class="add">Add</button> -->
                         <form action="addButton" method="post">
@@ -87,6 +87,7 @@ OR carclass.ClassName LIKE :csearch);";
     }
     ?>
 </div>
+</section>
 
 </body>
 

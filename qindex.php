@@ -17,7 +17,7 @@
         <div class="bannerText">
             <h1>ELEVATE YOUR BUSINESS</h1>
             <p>Reliable fleet rental. Get 10+ vehicles today!</p>
-            <button class="browseBtn">BROWSE FLEET</button>
+            <button class="browseBtn">BROWSE FLEET!</button>
         </div>
     </section>
 
@@ -38,7 +38,7 @@
                 $pdo = new PDO('mysql:host=localhost;dbname=carRentalSys; charset=utf8', 'root', '');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate
+    cars.Status,carclass.ClassName,carclass.Rate
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
@@ -58,7 +58,7 @@ WHERE cars.Status != 'D' ;"; // D - means deleted. For soft delete
                         <p>Class: <?php echo $row['ClassName'] ?></p>
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
-                        <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                        <p class="price">Price: <?php echo $row['Rate']; ?>€ </p>
                         <div class="buttonGroup">
                             
 

@@ -10,6 +10,10 @@ body {
     color: #333;
 }
 
+a {
+    text-decoration: none;
+}
+
 /************* Navbar */
 .navbar {
     background: #1a252f;
@@ -157,9 +161,11 @@ select {
     margin-right: auto;
     text-align: center;
 }
+
 .searchBar form {
     width: 100%;
 }
+
 .searchBar .searchInput {
     flex: 10;
     padding: 10px 14px;
@@ -167,6 +173,7 @@ select {
     border-radius: 15px;
     width: 50%;
 }
+
 .searchBar .searchDate {
     padding: 10px 14px;
     border: 1px solid #ccc;
@@ -193,14 +200,15 @@ select {
 
 table {
     width: 80%;
-    margin:  3em auto;
+    margin: 3em auto;
     border-collapse: collapse;
     background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 4px;
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
     text-align: left;
     border: 1px solid #d6d6d6;
@@ -219,4 +227,10 @@ tr {
 
 tr:hover {
     background-color: #f1f1f1;
+}
+
+/******** error message *******/
+.errorMsg {
+    color: red;
+    margin-top: 10px;
 }

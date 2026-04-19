@@ -7,4 +7,5 @@ $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in
 $e->getLine();
 echo 'Database error: ' . $e->getMessage();
 }
+session_start();
 ?>

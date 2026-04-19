@@ -7,23 +7,23 @@ try {
     
     $classname = $_POST['classname'];
     $cdescription = $_POST['cdescription'];
-    $cmonthlyrate = round((float)$_POST['cmonthlyrate'], 2);
-    if ($classname == '' or $cdescription == ''  or $cmonthlyrate == '')
+    $crate = round((float)$_POST['crate'], 2);
+    if ($classname == '' or $cdescription == ''  or $crate == '')
     {
         echo("You did not complete the insert form correctly <br> ");
                   }
 else{
-    $sql = "INSERT INTO CarClass (classname,description,monthlyrate) 
-    VALUES(:classname, :cdescription, :cmonthlyrate)";
+    $sql = "INSERT INTO CarClass (classname,description,rate) 
+    VALUES(:classname, :cdescription, :crate)";
     
     $stmt = $pdo->prepare($sql);
     
     $stmt->bindValue(':classname', $classname);
     $stmt->bindValue(':cdescription', $cdescription);
-    $stmt->bindValue(':cmonthlyrate', $cmonthlyrate);
+    $stmt->bindValue(':crate', $crate);
     
     $stmt->execute();
-echo  "Added try doing another";
+echo  '<script> alert("Class successfully added");</script>';
     }
 } 
 catch (PDOException $e) { 

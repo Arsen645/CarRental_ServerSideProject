@@ -12,7 +12,7 @@ include 'customerHeader.html';
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>
-
+<section class="ourCars">
     <div class="fleetGrid">
 
     <?php
@@ -21,7 +21,7 @@ include 'customerHeader.html';
         $fromShow = true;
         try {
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    carclass.ClassName,carclass.MonthlyRate, carclass.Description
+    carclass.ClassName,carclass.Rate, carclass.Description
 FROM cars
 JOIN carclass
 ON cars.carClass = carclass.className
@@ -55,7 +55,7 @@ AND NOT EXISTS (
                         <p>Class: <?php echo $row['ClassName'] ?></p>
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
-                        <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                        <p class="price">Price: <?php echo $row['Rate']; ?>€ </p>
                         <div class="buttonGroup">
                             <!-- <button class="add">Add</button> -->
                             <form action="" method="post">
@@ -79,6 +79,7 @@ AND NOT EXISTS (
     }
     ?>
 </div>
+</section>
 <?php
 
 
@@ -93,7 +94,7 @@ if (isset($_POST['add'])) {
                     $sql = "INSERT INTO rentals (CustomerID,StartDate,FinishDate,CarPlateNo) 
             VALUES(:cCustomerID, :cStartDate, :cFinishDate, :cCarPlateNo)";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(':cCustomerID', 5);
+                    $stmt->bindValue(':cCustomerID', $_SESSION['user_id']);
                     $stmt->bindValue(':cStartDate', $_POST['cStartDate']);
                     $stmt->bindValue(':cFinishDate', $_POST['cFinishDate'] );
                     $stmt->bindValue(':cCarPlateNo', $_POST['plateno']);

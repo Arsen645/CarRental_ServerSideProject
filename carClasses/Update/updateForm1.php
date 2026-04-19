@@ -20,7 +20,7 @@ try {
         $ClassID = $row['ClassID'];
         $ClassName = $row['ClassName'];
         $Description = $row['Description'];
-        $MonthlyRate = $row['MonthlyRate'];
+        $Rate = $row['Rate'];
     } 
     else {
         echo "No rows matched the query. Try again <a href='selectupdate.php'>here</a>";

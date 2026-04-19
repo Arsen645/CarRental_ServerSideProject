@@ -4,26 +4,10 @@
 <div class="formContainer">
     <h2>Add a new car class</h2>
     <form action="addClass.php" method="post">
-         ClassID: <!-- <input type="text" name="cclassid" value=""><br> -->
-        <?php
-
-
-        $sql = 'SELECT MAX(classid) as maxId
-                FROM carClass';
-        $result = $pdo->prepare($sql);
-        $result->execute();
-        $row = $result->fetch(PDO::FETCH_ASSOC);
-
-        if ($row && $row['maxId'] !== null) {
-            echo $row['maxId']+1;
-        } else {
-            echo "No data found!";
-        }
-
-        ?><br><br>
+        <br>
         ClassName: <input type="text" name="classname"><br>
         Description: <input type="text" name="cdescription" value=""><br>
-        MonthlyRate: <input type="text" name="cmonthlyrate"><br>
+        Price/day: <input type="text" name="crate"><br>
         <input type="submit" name="submitdetails1" value="SUBMIT" class="submitBtn">
     </form>
 

@@ -1,9 +1,10 @@
 <?php
-include '../header.html';
+session_start(); 
+
+include '../../header.html';
+include '../../connection.php';
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=carrentalsys;charset=utf8', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM carclass';
     $result = $pdo->query($sql);
@@ -15,10 +16,10 @@ try {
 
     <table>
         <tr>
-            <th>ClassID</th>
-            <th>ClassName</th>
+            <th>Class ID</th>
+            <th>Class Name</th>
             <th>Description</th>
-            <th>MonthlyRate</th>
+            <th>Rate</th>
 
             
         </tr>
@@ -32,12 +33,12 @@ try {
                     <td><?= htmlspecialchars($row['ClassID']) ?></td>
                     <td><?= htmlspecialchars($row['ClassName']) ?></td>
                     <td><?= htmlspecialchars($row['Description']) ?></td>
-                    <td><?= htmlspecialchars($row['MonthlyRate']) ?></td>
-                    <td><form action="Update/updateForm1.php" method="post">
+                    <td><?= htmlspecialchars($row['Rate']) ?></td>
+                    <td><form action="../Update/updateForm1.php" method="post">
                                 <input type="hidden" name="ClassID" value="<?= $row['ClassID']; ?>">
                                 <input type="submit" value="Update" class="add">
                             </form></td>
-                    <td><form action="Delete/deleteClass3.php" method="post">
+                    <td><form action="../Delete/deleteClass3.php" method="post">
                         <input type="hidden" name="ClassName" value="<?= $row['ClassName']; ?>">
                                 <input type="hidden" name="ClassID" value="<?= $row['ClassID']; ?>">
                                 <input type="submit" value="Delete" class="add">
@@ -49,7 +50,7 @@ try {
         <?php endif; ?>
     </table>
     <div class="formContainer">
-     <form action="Insert/addClass.php" method="post">                
+     <form action="../Insert/addClass.php" method="post">                
         New class: <br><br>
        
         <input type="submit" name="submitdetails" value="Add" class="submitBtn">
@@ -57,7 +58,15 @@ try {
      </div>
 
 <?php
+
+if (isset($_SESSION['update_message'])) {
+    echo "<script>alert('" . $_SESSION['update_message'] . "');</script>";
+    unset($_SESSION['update_message']);
+}
 } catch (PDOException $e) {
     echo 'Unable to connect to the database server: ' . $e->getMessage();
 }
 
+
+
+?>

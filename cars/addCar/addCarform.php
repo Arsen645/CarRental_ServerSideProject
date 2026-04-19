@@ -3,9 +3,9 @@
 <div class="formContainer">
     <h2>Add a new car</h2>
 <form action="addCar.php" method="post">
-    Plate Num: <input type="text" name="cplate" value=""> <br>
+    
     <!-- Brand: <input type="text" name="cbrand"><br> -->
-    Brand: <select name="cbrand" style="width: 100%;" onchange="this.form.submit()" value = <?php echo $_POST['cbrand'] ?>>  ////link (show only models of selected brand)onchange="this.form.submit()"
+   Brand: <select name="cbrand" style="width: 100%;" onchange="this.form.submit()" >  <!--  ////link (show only models of selected brand)onchange="this.form.submit()" -->
         <?php
         $flag = 0;
         $selectedBrandId = isset($_POST['cbrand']) ? $_POST['cbrand'] : '';  ////link (show only models of selected brand)
@@ -17,9 +17,9 @@
             echo "No cars found";
         }
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-$brand = $row["brandid"];
 $flag = 1;
-        ?><option value="<?php echo $row['brandid']; ?>"><?php echo $row['brandname']; ?></option>
+        ?><option value="<?php echo $row['brandid']; ?>" 
+        <?php echo ($row['brandid'] == $selectedBrandId) ? 'selected' : '' ?>><?php echo $row['brandname']; ?></option>
         <?php
 
         }
@@ -49,10 +49,11 @@ $flag = 1;
         ?>
         </select>
         <br>
+    Plate Num: <input type="text" name="cplate" value=""> <br>
     Year: <input type="text" name="cyear"><br>
     Car Class: <select name="ccarClass" style="width: 100px;">
         <?php
-        $sql = 'SELECT ClassName
+        $sql = 'SELECT ClassName, description
                 FROM carclass;';
         $result = $pdo->prepare($sql);
         $result->execute();
@@ -61,7 +62,7 @@ $flag = 1;
         }
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
-        ?><option value="<?php echo $row['ClassName']; ?>"><?php echo $row['ClassName']; ?></option>
+        ?><option value="<?php echo $row['ClassName']; ?>"><?php echo $row['ClassName'] . ' - ' .$row['description']; ?></option>
         <?php
 
         }

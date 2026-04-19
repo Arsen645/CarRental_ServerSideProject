@@ -58,7 +58,7 @@ WHERE brandid = :brand;';
             $stmt->bindValue(':ccarClass', $ccarClass);
 
             $stmt->execute();
-            echo "Added try doing another";
+            echo '<script> alert("Car successfully added ");</script>';
         }
     } catch (PDOException $e) {
         $title = 'An error has occurred';

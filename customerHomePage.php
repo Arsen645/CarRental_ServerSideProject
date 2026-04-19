@@ -1,32 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Car rental</title>
-    <link rel="stylesheet" href="stylecss.css">
-</head>
-
-<body>
-
-
-    <nav class="navbar">
-            <div class="logo">FLEET RENTAL</div>
-            <ul class="navLinks">
-            <li><a href="/arsen/CarRental_ServerSideProject/qindex.php">index</a></li>
-            <li><a href="/arsen/CarRental_ServerSideProject/cusHomePage.php">Home</a></li>
-            <li><a href="myCars.php">my cars</a></li>
-            <li><a href="login.php" class="loginBtn">Login</a></li>
-            <li><a href="register.php" class="loginBtn">Register</a></li>
-            </ul>
-        </nav>
+<?php 
+include 'connection.php';
+include 'customerHeader.html';
+?>
 
 
     <section class="banner">
         <div class="bannerText">
             <h1>ELEVATE YOUR BUSINESS</h1>
             <p>Reliable fleet rental. Get 10+ vehicles today!</p>
-            <button class="browseBtn">BROWSE FLEET</button>
+            <button class="browseBtn">BROWSE FLEET!</button>
         </div>
     </section>
 
@@ -41,7 +23,6 @@
 
     <section class="ourCars">
 
-
         <h2>Our Cars</h2>
         <div class="fleetGrid">
             <?php
@@ -49,7 +30,7 @@
                 $pdo = new PDO('mysql:host=localhost;dbname=carRentalSys; charset=utf8', 'root', '');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
-    cars.Status,carclass.ClassName,carclass.MonthlyRate
+    cars.Status,carclass.ClassName,carclass.rate
 FROM cars
 JOIN carclass 
 ON cars.carClass = carclass.className
@@ -67,7 +48,7 @@ WHERE cars.Status = "A";';
                         <p>Class: <?php echo $row['ClassName'] ?></p>
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
-                        <p class="price">Price: <?php echo $row['MonthlyRate']; ?>€ </p>
+                        <p class="price">Price: <?php echo $row['rate']; ?>€ </p>
                         <!-- <div class="buttonGroup">
                              <button class="add">Add</button> 
                             <form action="" method="post">
@@ -91,6 +72,11 @@ WHERE cars.Status = "A";';
                     $e->getLine();
                 echo 'Database error: ' . $e->getMessage();
             }
+
+            if (isset($_SESSION['cust_message'])) {
+    echo "<script>alert('" . $_SESSION['cust_message'] . "');</script>";
+    unset($_SESSION['cust_message']);
+}
 
             ?>
             

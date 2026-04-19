@@ -1,7 +1,6 @@
 <?php
+include '../../connection.php';
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=carrentalsys;charset=utf8', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'UPDATE customers 
             SET CorporateName = :cCorporateName, Email = :cEmail, Phone = :cPhone
@@ -16,16 +15,15 @@ try {
 //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
 ?> <p class="confirmation"> <?php
     if ($stmt->rowCount() > 0) {
-        
-        echo "You just updated customer: " . $_POST['CustomerID'] .
-             " � click <a href='/arsen/CarRental_ServerSideProject/qindex.php'>here</a> to go back";
+        $_SESSION['customers_message'] = 'You just updated customer: ' . $_POST['CorporateName'];
     } else {
-        echo "Nothing updated (either no such customer, or values were unchanged).".
-             " � click <a href='/arsen/CarRental_ServerSideProject/qindex.php'>here</a> to go back";
+        $_SESSION['customers_message'] = 'Nothing updated (either no such customer, or values were unchanged).';
     }
     ?> </p> <?php
 
 } catch (PDOException $e) {
     echo 'Unable to process query: ' . $e->getMessage();
 }
+header("location:../Table/custTable.php");
+    exit;
 ?>
