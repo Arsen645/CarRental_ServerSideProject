@@ -98,23 +98,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 try {
 
-    $sql = 'UPDATE cars 
-            SET Brand = :cbrand, Model = :cmodel, Status = :cstatus, carClass = :ccarClass 
-            WHERE plateno = :cplate';
+    $brandid = $_POST['ud_brand'];  
+$sqlBrand = 'SELECT brandname FROM brand WHERE brandid = :cbrand';
+$stmtBrand = $pdo->prepare($sqlBrand);
+$stmtBrand->bindValue(':cbrand', $brandid);
+$stmtBrand->execute();
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':cplate', $_POST['ud_plate']);
-    $stmt->bindValue(':cbrand', $_POST['ud_brand']);
-    $stmt->bindValue(':cmodel', $_POST['ud_model']);
-    $stmt->bindValue(':cstatus', 'A');
-    $stmt->bindValue(':ccarClass', $_POST['ud_carClass']);
-    $stmt->execute();
-//For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
-    if ($stmt->rowCount() > 0) {
-        echo '<script> alert("Updated successfully: ";</script>';
-    } else {
-        echo '<script> alert("Nothing updated (either no such car, or values were unchanged). ";</script>';
-    }
+if ($stmtBrand->rowCount() > 0) {
+    $brandRow = $stmtBrand->fetch(PDO::FETCH_ASSOC);
+    $brandName = $brandRow['brandname'];  
+}
+
+$sql = 'UPDATE cars 
+        SET Brand = :cbrand, Model = :cmodel, Status = :cstatus, carClass = :ccarClass 
+        WHERE plateno = :cplate';
+
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':cplate', $_POST['ud_plate']);
+$stmt->bindValue(':cbrand', $brandName);  
+$stmt->bindValue(':cmodel', $_POST['ud_model']);
+$stmt->bindValue(':cstatus', 'A');
+$stmt->bindValue(':ccarClass', $_POST['ud_carClass']);
+$stmt->execute();
+
+if ($stmt->rowCount() > 0) {
+    echo '<script> alert("Updated successfully!"); </script>';
+} else {
+    echo '<script> alert("Nothing updated (either no such car, or values were unchanged)."); </script>';
+}
 
 } catch (PDOException $e) {
     echo 'Unable to process query: ' . $e->getMessage();
