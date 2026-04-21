@@ -153,8 +153,7 @@ select {
 
 /**********search bar*/
 .searchBar {
-    display: flex;
-    gap: 8px;
+    
     width: 80%;
     margin-top: 2em;
     margin-left: auto;
@@ -164,16 +163,20 @@ select {
 
 .searchBar form {
     width: 100%;
+    display: flex;
+    gap: 8px;
 }
 
 .searchBar .searchInput {
-    flex: 10;
+    
     padding: 10px 14px;
     border: 1px solid #ccc;
     border-radius: 15px;
-    width: 50%;
+    width: 100%;
 }
-
+.searchBar .searchText {
+    flex: 2;
+}
 .searchBar .searchDate {
     padding: 10px 14px;
     border: 1px solid #ccc;
@@ -181,7 +184,7 @@ select {
 }
 
 .searchBar .searchButton {
-    width: 7%;
+    
     padding: 10px 18px;
     border: none;
     background-color: #f4b400;

@@ -1,13 +1,18 @@
     <?php
     include '../registerNavbar.php';
     //htmlspecialchars(trim(
-    funciton isValidPhone ($phone) {
+    function isValidPhone ($phone) {
         $pattern = '/^\+?\d{9}$/';
         $result = preg_match($pattern, $phone);
         return $result;
     }
+    function isValidPassword ($password) {
+        if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password))
+        return false;
+        return true;
+    }
     $id = 0;
-
+    $msg = '';
     $name;
         $password;
         $email;
@@ -19,6 +24,17 @@
         $email = htmlspecialchars(trim($_POST["email"]));
         $phone= htmlspecialchars(trim($_POST["phone"]));
         
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['errorMsg'] = "Invalid email format";
+        header("location: register.php");
+        exit;
+        }
+
+        if (!isValidPhone($phone)) {
+            $_SESSION["errorMsg"] = "Invalid phone number";
+        }
+        if (!isValidPassword($password)) {
+            $_SESSION["errorMsg"] = "Password must be at least 8 symbols  contain at least one uppercase letter, one lowercase, and one number";
         // Hash password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Insert into DB
@@ -28,7 +44,7 @@
             $_SESSION['cust_message'] = 'Registered successfully';
             header("location:../customerHomePage.php");
             exit;
-    exit;
+    
         } catch (PDOException $e) {
             echo "Error " . $e;
         }
@@ -64,6 +80,7 @@
 
             <input type="submit" name="submit" value="Register" class="submitBtn"><br>
             <p>Have an account? <a href="login.php"> Log In</a></p>
+            <p><?php echo $_SESSION['errorMsg']; ?></p>
         </form>
     </div>
 </body>

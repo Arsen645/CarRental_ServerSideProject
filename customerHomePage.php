@@ -14,10 +14,33 @@ include 'customerHeader.html';
 
     <div class="searchBar">
         <form action="CustSearchPage.php" method="post">
-            <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
-            From: <input type="date" name="cStartDate" class="searchDate">
-            To: <input type="date" name="cFinishDate" class="searchDate">
-            <input type="submit" name="search" value="search" class="searchButton">
+            <div class='searchUnit searchText'><input type="text" name="csearch" class="searchInput" placeholder="Search cars..."></div>
+            <div class='searchUnit'>Year: 
+            <!-- <input type="number" name="year" min="2000" max="2026" step="1" placeholder="Enter year" style="height: 30%;"> -->
+            <select name="cyear" style="width: 100px;">
+            <?php for ($i = 2010; $i <= date("Y"); $i++) {  // date("Y") https://www.w3schools.com/php/php_date.asp ?>
+            <option value="<?= $i ?>"><?php echo $i ?>+</option> <?php } ?>
+            </select></div>
+            <div class='searchUnit'>Class: <select name="ccarClass" style="width: 130px;">
+        <?php
+        $sql = 'SELECT ClassName, description
+                FROM carclass;';
+        $result = $pdo->prepare($sql);
+        $result->execute();
+        if ($result->rowCount() == 0) {
+            echo "No cars found";
+        }
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+        ?><option value="<?php echo $row['ClassName']; ?>"><?php echo $row['ClassName'] . ' - ' .$row['description']; ?></option>
+        <?php
+
+        }
+        ?>
+        </select></div>
+           <div class='searchUnit'> From: <input type="date" name="cStartDate" class="searchDate" value="<?= date("Y-m-d"); ?>" required></div>
+            <div class='searchUnit'>To: <input type="date" name="cFinishDate" class="searchDate" value="<?= date("Y-m-d"); ?>" required></div>
+            <div class='searchUnit'><input type="submit" name="search" value="search" class="searchButton"></div>
         </form>
     </div>
 
