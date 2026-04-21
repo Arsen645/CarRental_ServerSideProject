@@ -34,7 +34,8 @@
             $_SESSION["errorMsg"] = "Invalid phone number";
         }
         if (!isValidPassword($password)) {
-            $_SESSION["errorMsg"] = "Password must be at least 8 symbols  contain at least one uppercase letter, one lowercase, and one number";
+            $_SESSION["errorMsg"] = "Password must be at least 8 symbols, contain at least one uppercase letter, one lowercase, and one number";
+        }
         // Hash password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Insert into DB
