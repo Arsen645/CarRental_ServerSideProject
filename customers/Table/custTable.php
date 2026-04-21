@@ -1,7 +1,7 @@
 <?php
 include '../../header.html';
 include '../../connection.php';
-session_start();
+
 
 
 try {
@@ -60,5 +60,6 @@ if (isset($_SESSION['customers_message'])) {
     echo 'Unable to connect to the database server: ' . $e->getMessage();
 }
 
-
-include 'updateCustomer/whotoupdate.html';
+?>
+</body>
+</html>

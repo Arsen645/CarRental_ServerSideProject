@@ -246,7 +246,7 @@ tr:hover {
   font-family: Arial, sans-serif;
 }
 
-.footer-container {
+.footerContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -259,34 +259,34 @@ tr:hover {
   color: #fff;
 }
 
-.footer-brand {
+.footerLogo {
   max-width: 300px;
 }
 
-.footer-links ul {
+.footerLinks ul {
   list-style: none;
   padding: 0;
 }
 
-.footer-links ul li {
+.footerLinks ul li {
   margin: 8px 0;
 }
 
-.footer-links a {
+.footerLinks a {
   text-decoration: none;
   color: #ccc;
   transition: 0.3s;
 }
 
-.footer-links a:hover {
+.footerLinks a:hover {
   color: #f1c40f;
 }
 
-.footer-contact p {
+.footerContact p {
   margin: 6px 0;
 }
 
-.footer-bottom {
+.footerBottom {
   text-align: center;
   padding: 15px;
   margin-top: 30px;

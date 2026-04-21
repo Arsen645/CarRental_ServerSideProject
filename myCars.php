@@ -1,6 +1,6 @@
 <?php include 'connection.php';
 include 'customerHeader.html';
-session_start();
+
 $cutsId = $_SESSION['user_id'];
 
 ?>
@@ -142,7 +142,9 @@ AND rentals.FinishDate >= CURDATE();';
 
 
 
-        
+        <?php 
+include 'footer.html';
+?>
     </body>
 
     </html>

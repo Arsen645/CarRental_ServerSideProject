@@ -1,48 +1,53 @@
-
-
 <?php
 include '../registerNavbar.php';
 $error = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-$email = $_POST['email'];
-$password = $_POST['password'];
+    $password = htmlspecialchars(trim($_POST["password"]));
+        $email = htmlspecialchars(trim($_POST["email"]));
 
-// Get user
-$stmt = $pdo->prepare("SELECT * FROM customers WHERE email = ?");
-$stmt->execute([$email]);
-$customer = $stmt->fetch();
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['errorMsg'] = "Invalid email format";
+        header("location: login.php");
+        exit;
+        }
 
-if ($customer && password_verify($password, $customer['password'])) {
-$_SESSION['user_id'] = $customer['CustomerID'];
-if ($_SESSION['user_id'] == 10) { //add admin id
-header("location:../qindex.php");
-exit;
-}
-// echo "Login successfull";
 
-header("location:../customerHomePage.php");
+    // Get user
+    $stmt = $pdo->prepare("SELECT * FROM customers WHERE email = ?");
+    $stmt->execute([$email]);
+    $customer = $stmt->fetch();
+
+    if ($customer && password_verify($password, $customer['password'])) {
+        $_SESSION['user_id'] = $customer['CustomerID'];  
+        if ($_SESSION['user_id'] == 10) { //add admin id
+          header("location:../qindex.php");
             exit;
-} else {
-$error = "Invalid email or password";
-} 
+        }
+        // echo "Login successfull";
+
+        header("location:../customerHomePage.php");
+        exit;
+    } else {
+        $error = "Invalid email or password";
+    }
 }
 ?>
 <div class="formContainer">
 
-<form method="POST">
-<input type="text" name="email" placeholder="Email" required><br>
-<input type="password" name="password" placeholder="Password" required><br>
+    <form method="POST">
+        <input type="text" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
 
 
 
-<input type="submit" name="submit" value="Login" class="submitBtn"><br>
-  <p>Don't have an account? <a href="register.php"> Sign Up</a></p>
-</form>
-<?php if (!empty($error)) { ?>
-    <p class="errorMsg">
-        <?= $error; ?>
-    </p>
-<?php } ?>
+        <input type="submit" name="submit" value="Login" class="submitBtn"><br>
+        <p>Don't have an account? <a href="register.php"> Sign Up</a></p>
+    </form>
+    <?php if (!empty($error)) { ?>
+        <p class="errorMsg">
+            <?= $error; ?>
+        </p>
+    <?php } ?>
 </div>
 </body>
 

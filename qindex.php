@@ -16,7 +16,7 @@
     <section class="banner">
         <div class="bannerText">
             <h1>ELEVATE YOUR BUSINESS</h1>
-            <p>Reliable fleet rental. Get 10+ vehicles today!</p>
+            <p>Reliable car rental. Get 10+ vehicles today!</p>
             <button class="browseBtn">BROWSE FLEET!</button>
         </div>
     </section>
@@ -91,47 +91,9 @@ WHERE cars.Status != 'D' ;"; // D - means deleted. For soft delete
         </div>
     </section>
 
-<footer class="footer">
-  <div class="footer-container">
-    
-    <div class="footer-brand">
-      <h2>FLEET RENTAL</h2>
-      <p>Reliable fleet rental solutions for your business. Get moving with confidence.</p>
-    </div>
-
-    <div class="footer-links">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Browse Cars</a></li>
-        <li><a href="#">Car Classes</a></li>
-        <li><a href="#">Rentals</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-links">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Customers</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Support</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-contact">
-      <h4>Contact</h4>
-      <p>Email: support@fleetrental.com</p>
-      <p>Phone: +1 234 567 890</p>
-      <p>Location: Tralee</p>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 Car Rental.</p>
-  </div>
-</footer>
+<?php 
+include 'footer.html';
+?>
 
 
 

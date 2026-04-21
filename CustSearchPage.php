@@ -7,7 +7,7 @@ include 'customerHeader.html';
     <div class="searchBar">
         <form action="CustSearchPage.php" method="post">
             <div class='searchUnit searchText'>
-                <input type="text" name="csearch" class="searchInput" placeholder="Search cars..." value = "<?php echo $_POST['csearch'] ?>"></div>
+                <input type="text" name="csearch" class="searchInput" placeholder="Search cars..." value="<?= htmlspecialchars($_POST['csearch'] ?? '') ?>"></div>
             <div class='searchUnit'>Year: 
             <!-- <input type="number" name="year" min="2000" max="2026" step="1" placeholder="Enter year" style="height: 30%;"> -->
             <select name="cyear" style="width: 100px;">
@@ -53,6 +53,13 @@ include 'customerHeader.html';
     
     if (isset($_POST['search'])) {
 
+    $startDate = new DateTime($_POST['cStartDate']);     //   https://stackoverflow.com/questions/2040560/finding-the-number-of-days-between-two-dates
+$finishDate = new DateTime($_POST['cFinishDate']);      //finding number of days between two dates
+
+$interval = $startDate->diff($finishDate);
+$days = $interval->days;
+$days +=1;
+
         $fromShow = true;
         try {
             $sql = 'SELECT cars.PlateNo,cars.Brand,cars.Model,cars.YearManufactured,
@@ -64,9 +71,9 @@ WHERE cars.Status != "D"
 AND (cars.PlateNo LIKE :csearch
 OR cars.Brand LIKE :csearch
 OR cars.Model Like :csearch
-OR cars.YearManufactured >= :cyear
-OR carclass.Description LIKE :csearch
-OR carclass.ClassName = :ccarClass)
+OR carclass.Description LIKE :csearch)
+AND cars.YearManufactured >= :cyear
+AND carclass.ClassName = :ccarClass
 AND NOT EXISTS (
     SELECT *
     FROM rentals
@@ -94,6 +101,7 @@ AND NOT EXISTS (
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                         <p class="price">Price/day: <?php echo $row['Rate']; ?>€ </p>
+                        <p class="price">Total: <?php echo $row['Rate'] * (int) $days; ?>€ </p>
                         <div class="buttonGroup">
                             <!-- <button class="add">Add</button> -->
                             <form action="" method="post">
@@ -145,6 +153,9 @@ if (isset($_POST['add'])) {
                 }
 
             }
+?>
+<?php 
+include 'footer.html';
 ?>
 </body>
 

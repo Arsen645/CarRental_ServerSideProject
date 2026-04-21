@@ -18,7 +18,7 @@
 
     <div class="searchBar">
         <form action="searchPage.php" method="post">
-            <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
+            <input type="text" name="csearch" class="searchInput" placeholder="Search cars..." value = "<?php echo $_POST['csearch'] ?>">
             
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
@@ -88,7 +88,9 @@ OR carclass.ClassName LIKE :csearch);";
     ?>
 </div>
 </section>
-
+<?php 
+include 'footer.html';
+?>
 </body>
 
 </html>
