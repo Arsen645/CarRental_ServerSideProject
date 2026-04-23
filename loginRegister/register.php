@@ -47,7 +47,7 @@
             exit;
     
         } catch (PDOException $e) {
-            echo "Error " . $e;
+            $_SESSION['errorMsg'] = "Dublicate email";
         }
 
         $stmt = $pdo->prepare("SELECT CustomerID FROM customers WHERE email = :cemail");
