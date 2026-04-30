@@ -20,7 +20,6 @@ try {
         $plateno = $row['PlateNo'];
         $brand = $row['Brand'];
         $model = $row['Model'];
-        $status = $row['Status'];
         $carClass = $row['carClass'];
     } 
     else {

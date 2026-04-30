@@ -6,7 +6,7 @@ include 'customerHeader.html';
 
     <section class="banner">
         <div class="bannerText">
-            <h1>ELEVATE YOUR BUSINESS</h1>
+            <h1>ELEVATE YOUR VACATION</h1>
             <p>Reliable car rental. Get 10+ vehicles today!</p>
             <button class="browseBtn">BROWSE FLEET!</button>
         </div>

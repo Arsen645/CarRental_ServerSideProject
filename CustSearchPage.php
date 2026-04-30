@@ -9,11 +9,11 @@ function dateCheck($start, $end)
         return false;
     }
 
-    if ($start < $today) {
-        ?>
-        <script> alert("Date cannot be in the past."); </script> <?php
-        return false;
-    }
+    // if ($start < $today) {
+    //     ?>
+    <!-- //     <script> alert("Date cannot be in the past."); </script>--> <?php 
+    //     return false;
+    // }
 
     if ($end < $start) {
         ?>

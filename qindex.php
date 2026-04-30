@@ -10,12 +10,13 @@
 <body>
 
 
-    <?php include 'admNavbar.php'; ?>
+    <?php include 'admNavbar.php';
+    include 'connection.php' ?>
 
 
     <section class="banner">
         <div class="bannerText">
-            <h1>ELEVATE YOUR BUSINESS</h1>
+            <h1>ELEVATE YOUR VACATION</h1>
             <p>Reliable car rental. Get 10+ vehicles today!</p>
             <button class="browseBtn">BROWSE FLEET!</button>
         </div>
@@ -77,11 +78,12 @@ WHERE cars.Status != 'D' ;"; // D - means deleted. For soft delete
                 }
                 //echo 'here';
             } catch (PDOException $e) {
-                $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' .
-                    $e->getLine();
-                echo 'Database error: ' . $e->getMessage();
+                echo 'No cars matched the query';
             }
-
+if (isset($_SESSION['carDeleteMsg'])) {
+    echo "<script>alert('" . $_SESSION['carDeleteMsg'] . "');</script>";
+    unset($_SESSION['carDeleteMsg']);
+}
             ?>
 
 

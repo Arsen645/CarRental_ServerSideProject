@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = htmlspecialchars(trim($_POST["password"]));
         $email = htmlspecialchars(trim($_POST["email"]));
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) && $email != 'admin') {
         $_SESSION['errorMsg'] = "Invalid email format";
         header("location: login.php");
         exit;
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($customer && password_verify($password, $customer['password'])) {
         $_SESSION['user_id'] = $customer['CustomerID'];  
-        if ($_SESSION['user_id'] == 10) { //add admin id
+        if ($_SESSION['user_id'] == 1) { //add admin id
           header("location:../qindex.php");
             exit;
         }

@@ -80,9 +80,7 @@ OR carclass.ClassName LIKE :csearch);";
             }
             //echo 'here';
         } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' .
-                $e->getLine();
-            echo 'Database error: ' . $e->getMessage();
+            echo 'Lost connection to database';
         }
     }
     ?>

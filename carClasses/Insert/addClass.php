@@ -14,7 +14,7 @@ try {
                   }
 else{
     $sql = "INSERT INTO CarClass (classname,description,rate) 
-    VALUES(:classname, :cdescription, :crate)";
+    VALUES(UPPER(:classname), :cdescription, :crate)";
     
     $stmt = $pdo->prepare($sql);
     

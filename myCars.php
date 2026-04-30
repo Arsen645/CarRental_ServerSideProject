@@ -27,7 +27,7 @@ AND rentals.FinishDate >= CURDATE();';
             $result->bindValue(':customerId', $cutsId);
             $result->execute();
             if ($result->rowCount() == 0) { 
-                echo "No cars found";
+                echo "You do not have future reservations";
             }
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 ?>
@@ -67,9 +67,7 @@ AND rentals.FinishDate >= CURDATE();';
             }
             //echo 'here';
         } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' .
-                $e->getLine();
-            echo 'Database error: ' . $e->getMessage();
+            echo 'No cars matched the query';
         }
 
         ?>
@@ -78,67 +76,8 @@ AND rentals.FinishDate >= CURDATE();';
 
     </div>
 </section>
-<!-- <section class="myTotals">
-    <h2>total rent:
-        <?php
-//         $sql = 'SELECT sum(carclass.Rate) as totalRent
-// FROM cars
-// JOIN carclass 
-// ON cars.carClass = carclass.ClassName
-// WHERE cars.Status = "N";';
-//         $result = $pdo->prepare($sql);
-//         $result->execute();
-//         $row = $result->fetch(PDO::FETCH_ASSOC);
-//         echo $row['totalRent'];
-        ?>
-        €
-    </h2>
-</section> -->
 
-
-
-            
-<?php
-
-        //     if (isset($_POST['remove'])) {
-
-        //         try {
-        //             $pdo = new PDO('mysql:host=localhost;dbname=carrentalsys;charset=utf8', 'root', '');
-        //             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        //             $sql = 'UPDATE cars 
-        //     SET Status = :cstatus
-        //     WHERE plateno = :cplate';
-
-        //             $stmt = $pdo->prepare($sql);
-        //             $stmt->bindValue(':cstatus', 'A');
-        //             $stmt->bindValue(':cplate', $_POST['plateno']);
-        //             $stmt->execute();
-
-                    
-
-
-        //             // add finish date to rental record
-        //             $sql = "UPDATE rentals 
-        // SET FinishDate = :cFinishDate
-        // WHERE RentID = :cRentID";
-        //     $stmt = $pdo -> prepare($sql);
-        //     $stmt->bindValue(':cFinishDate', date('Y-m-d'));
-        //     $stmt->bindValue(':cRentID', $_POST['plateno']);
-            
-        //             $stmt->execute();
-        //             $rentalID = (int) $pdo->lastInsertId();
-
-        //         } catch (PDOException $e) {
-        //             echo 'Unable to process query: ' . $e->getMessage();
-        //         }
-
-
-
-
-
-        //     }
-            ?>
+          
 
 
 

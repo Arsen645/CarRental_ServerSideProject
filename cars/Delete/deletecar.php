@@ -9,7 +9,7 @@ try {
     SELECT *
     FROM rentals
     WHERE rentals.CarPlateNo = cars.PlateNo
-    AND rentals.FinishDate > :NOW()
+    AND rentals.FinishDate > NOW()
     );';
 
     $stmt = $pdo->prepare($sql);
@@ -17,11 +17,14 @@ try {
     $stmt->execute();
     //For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
     if ($stmt->rowCount() > 0) {
-        echo "You just deleted car no: " . $_POST['plateno'] .
-            " � click <a href='/arsen/CarRental_ServerSideProject/qindex.php'>here</a> to go back";
+        $_SESSION['carDeleteMsg'] = 'You just deleted car.';
+
+            header("location:../../qindex.php");
+    exit;
     } else {
-        echo "Nothing updated (either no such car, or values were unchanged)." .
-            " � click <a href='/arsen/CarRental_ServerSideProject/qindex.php'>here</a> to go back";
+        $_SESSION['carDeleteMsg'] = 'ooops couldnt delete as that car has future reservations';
+            header("location:../../qindex.php");
+    exit;
     }
 
 } catch (PDOException $e) {

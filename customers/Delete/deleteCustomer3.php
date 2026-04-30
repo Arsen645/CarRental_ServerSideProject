@@ -11,7 +11,7 @@ $result->execute();
 }
 catch (PDOException $e) {
 if ($e->getCode() == 23000) {
-        $_SESSION['customers_message'] = 'ooops couldnt delete as that record is linked to other tables';
+        $_SESSION['customers_message'] = 'ooops couldnt delete as that customer has records in other tables';
 
 }
 } 
