@@ -18,7 +18,7 @@
 
     <div class="searchBar">
         <form action="searchPage.php" method="post">
-            <input type="text" name="csearch" class="searchInput" placeholder="Search cars..." value = "<?php echo $_POST['csearch'] ?>">
+            <input type="text" name="csearch" class="searchInput" placeholder="Enter brand, model, or description..." value = "<?php echo $_POST['csearch'] ?>">
             
             <input type="submit" name="search" value="search" class="searchButton">
         </form>

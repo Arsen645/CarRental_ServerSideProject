@@ -23,7 +23,7 @@
 
     <div class="searchBar">
         <form action="searchPage.php" method="post">
-            <input type="text" name="csearch" class="searchInput" placeholder="Search cars...">
+            <input type="text" name="csearch" class="searchInput" placeholder="Enter brand, model, or description...">
             <input type="submit" name="search" value="search" class="searchButton">
         </form>
     </div>

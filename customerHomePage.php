@@ -14,7 +14,7 @@ include 'customerHeader.html';
 
     <div class="searchBar">
         <form action="CustSearchPage.php" method="post">
-            <div class='searchUnit searchText'><input type="text" name="csearch" class="searchInput" placeholder="Search cars..."></div>
+            <div class='searchUnit searchText'><input type="text" name="csearch" class="searchInput" placeholder="Enter brand, model, or description..."></div>
             <div class='searchUnit'>Year: 
             <!-- <input type="number" name="year" min="2000" max="2026" step="1" placeholder="Enter year" style="height: 30%;"> -->
             <select name="cyear" style="width: 100px;">
@@ -72,19 +72,7 @@ WHERE cars.Status = "A";';
                         <p>Year: <?php echo $row['YearManufactured'] ?></p>
                         <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                         <p class="price">Price: <?php echo $row['rate']; ?>€ </p>
-                        <!-- <div class="buttonGroup">
-                             <button class="add">Add</button> 
-                            <form action="" method="post">
-                                <input type="hidden" name="plateno" value="<?php //$row['PlateNo']; ?>">
-                                <input type="submit" value="Add" class="add"  name="add">
-                          
-                            </form>
-                            <form action="" method="post">
-                                <input type="hidden" name="plateno" value="<?php //$row['PlateNo']; ?>">
-                                <input type="submit" value="To Basket" class="add"  name="basket">
-                          
-                            </form>
-                        </div> -->
+                        
                     </div>
                     <?php
             
