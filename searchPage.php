@@ -58,12 +58,7 @@ OR carclass.ClassName LIKE :csearch);";
                     <p>Plate No: <?php echo $row['PlateNo'] ?></p>
                     <p class="price">Price: <?php echo $row['Rate']; ?>€ </p>
                     <div class="buttonGroup">
-                        <!-- <button class="add">Add</button> -->
-                        <form action="addButton" method="post">
-                            <input type="hidden" name="plateno" value="<?= $row['PlateNo']; ?>">
-                            <input type="submit" value="Add" class="add">
-
-                        </form>
+                        
 
                         <form action="cars/Update/updateForm1.php" method="post">
                             <input type="hidden" name="ud_plate" value="<?= $row['PlateNo']; ?>">

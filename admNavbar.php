@@ -6,7 +6,7 @@
             <li><a href="customers/Table/custTable.php">Customers</a></li>
             <li><a href="rentals/Table/rentalsTable.php">Rentals </a></li>
             <li><a href="qindex.php">Home</a></li>
-            <li><a href="customerHomePage.php" class="loginBtn">cusHomePage</a></li>
+            <li><a href="customerHomePage.php" class="loginBtn">Customer View</a></li>
 
 
         </ul>

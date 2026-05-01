@@ -46,7 +46,7 @@ WHERE brandid = :brand;';
             $pdo = new PDO('mysql:host=localhost;dbname=CarRentalSys; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "INSERT INTO cars (plateNo,brand,model,yearManufactured,status,carClass) 
-            VALUES(:cplateNo, :cbrand, :cmodel, :cyear, :cstatus, :ccarClass)";
+            VALUES(UPPER(:cplateNo), :cbrand, :cmodel, :cyear, :cstatus, :ccarClass)";
 
             $stmt = $pdo->prepare($sql);
 
@@ -61,9 +61,7 @@ WHERE brandid = :brand;';
             echo '<script> alert("Car successfully added ");</script>';
         }
     } catch (PDOException $e) {
-        $title = 'An error has occurred';
-        $output = 'Database error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
-        echo $output;
+        echo '<script> alert("Cannot add the car. Check the number plate ");</script>';
     }
 }
 

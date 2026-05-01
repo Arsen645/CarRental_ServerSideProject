@@ -48,7 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?= $error; ?>
         </p>
     <?php } ?>
+    
 </div>
+<p class='info'>admin login: <br>email: admin password: admin <br>
+customer login: <br>email: tst@gmail.com password: Qwerty123 <br> </p>
 </body>
 
 </html>
