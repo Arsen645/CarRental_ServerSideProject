@@ -17,7 +17,7 @@ try {
     <table>
         <tr>
             <th>CustomerID</th>
-            <th>CorporateName</th>
+            <th>Customer Name</th>
             <th>Email</th>
             <th>Phone</th>
 
